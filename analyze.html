@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Analyze dental X-rays using AI - Detect tooth diseases, get health recommendations, and book appointments with ORAL CARE AI.">
-    <title>X-ray Analysis - ORAL CARE-X-AI</title>
+    <title>AI Dental Diagnosis - ORAL CARE-X-AI</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/animations.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
@@ -54,9 +55,16 @@
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1 data-lang="analyze_title">Dental X-ray Analysis</h1>
-        <p data-lang="analyze_subtitle">Upload your dental X-rays for AI-powered disease detection and recommendations
-        </p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
+            <div>
+                <h1 data-lang="analyze_title">Dental X-ray Analysis</h1>
+                <p data-lang="analyze_subtitle">Upload your dental X-rays for AI-powered disease detection and recommendations
+                </p>
+            </div>
+            <div style="max-width: 140px; border: none; padding: 0; background: transparent; margin: 0; position: relative;">
+                <img src="Maleeha.png" alt="Maleeha" style="width: 100%; height: auto; border: none; display: block; background: transparent; filter: drop-shadow(0 20px 40px rgba(0, 20, 50, 0.6)) drop-shadow(0 10px 20px rgba(0, 100, 200, 0.3)); opacity: 0.95; mix-blend-mode: screen; box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.1), 0 0 50px rgba(0, 212, 255, 0.15); border-radius: 50%;" />
+            </div>
+        </div>
     </section>
 
     <!-- CNN Algorithm Instructions Section -->
@@ -220,6 +228,14 @@
                         </div>
                     </div>
 
+                    <!-- Oral Health Tips -->
+                    <div class="result-section">
+                        <h3 data-lang="analyze_tips">Oral Health Tips</h3>
+                        <div id="oral-tips" class="oral-tips-list">
+                            <!-- Daily tips will be populated here -->
+                        </div>
+                    </div>
+
                     <!-- Precautions -->
                     <div class="result-section">
                         <h3 data-lang="analyze_precautions">Preventive Precautions</h3>
@@ -259,6 +275,19 @@
             </div>
         </div>
     </div>
+
+    <!-- Motivational Section -->
+    <section style="max-width: 900px; margin: 60px auto; padding: 40px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(74, 222, 128, 0.1)); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 16px; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <div style="max-width: 120px;">
+                <img src="assets/cartoon-tooth-mascot.svg" alt="Happy Tooth" style="width: 100%; height: auto; animation: float 4s ease-in-out infinite;" />
+            </div>
+            <div>
+                <h2 style="color: #00d4ff; margin-bottom: 12px; font-size: 24px;">Keep Your Smile Healthy!</h2>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; margin: 0;">Follow the tips from your analysis results and visit your dentist regularly for the best oral health.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">

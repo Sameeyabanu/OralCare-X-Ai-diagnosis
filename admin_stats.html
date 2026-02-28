@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin — Disease Statistics</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; padding: 24px; background: #061428; color: #fff; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+        .title { font-size:1.25rem; font-weight:700; }
+        .card { background: rgba(15,57,120,0.9); padding:16px; border-radius:10px; margin-top:20px; }
+        .chart-wrap { width:100%; height:420px; }
+        .small { font-size:0.9rem; opacity:0.85 }
+        .back { color:#00d4ff; text-decoration:none }
+        .logout { background:#ff4757; border:none; color:white; padding:8px 12px; border-radius:8px; cursor:pointer }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <div class="title">Disease Detection — Admin Analytics</div>
+                <div class="small">Bar chart of detected conditions from users</div>
+            </div>
+            <div>
+                <button id="refreshBtn" class="nav-btn">Refresh</button>
+                <button id="backBtn" class="nav-btn">Back</button>
+                <button id="logoutBtn" class="logout">Logout</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <canvas id="diseaseChart" class="chart-wrap"></canvas>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
+            <div id="totalRecords" class="small"></div>
+            <div id="uniqueUsers" class="small"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Restrict to admin only
+        if (sessionStorage.getItem('isLoggedIn') !== 'true' || sessionStorage.getItem('userType') !== 'admin') {
+            window.location.href = 'login.html';
+        }
+
+        function aggregateRecords(records) {
+            const counts = {};
+            records.forEach(r => {
+                const name = r.disease || 'Unknown';
+                counts[name] = (counts[name] || 0) + 1;
+            });
+            return counts;
+        }
+
+        function renderChart() {
+            const raw = JSON.parse(localStorage.getItem('diseaseRecords')) || [];
+            const counts = aggregateRecords(raw);
+            const labels = Object.keys(counts);
+            const data = labels.map(l => counts[l]);
+
+            const ctx = document.getElementById('diseaseChart').getContext('2d');
+            if (window._diseaseChart) window._diseaseChart.destroy();
+            window._diseaseChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Detections',
+                        data: data,
+                        backgroundColor: labels.map((_,i) => `hsl(${(i*45)%360} 70% 55%)`),
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            document.getElementById('totalRecords').innerText = 'Total records: ' + raw.length;
+            const users = new Set(raw.map(r=>r.email));
+            document.getElementById('uniqueUsers').innerText = 'Unique users: ' + users.size;
+        }
+
+        document.getElementById('refreshBtn').addEventListener('click', renderChart);
+        document.getElementById('backBtn').addEventListener('click', function(){ window.location.href = 'login.html'; });
+        document.getElementById('logoutBtn').addEventListener('click', function(){ sessionStorage.clear(); window.location.href='login.html'; });
+
+        renderChart();
+    </script>
+</body>
+</html>

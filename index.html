@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ORAL CARE-X-AI-Enhances Diagnostics using CNN Algorithm.">
+    <title>ORAL CARE-X-AI - AI-Powered Dental Diagnostics</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', var(--font-main);
+        }
+
+        /* ── Emoji Showcase (compact) ── */
+        .emoji-showcase {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+            flex-wrap: nowrap;
+        }
+
+        .emoji-card {
+            flex: 1;
+            min-width: 68px;
+            max-width: 88px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emoji-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .emoji-card.card-rocket::before {
+            background: radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.25), transparent 70%);
+        }
+
+        .emoji-card.card-cal::before {
+            background: radial-gradient(circle at 50% 0%, rgba(123, 207, 100, 0.22), transparent 70%);
+        }
+
+        .emoji-card.card-micro::before {
+            background: radial-gradient(circle at 50% 0%, rgba(180, 100, 255, 0.22), transparent 70%);
+        }
+
+        .emoji-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .emoji-card:hover::before {
+            opacity: 1;
+        }
+
+        .emoji-card .big-emoji {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 5px;
+            animation: emojiFloat 3s ease-in-out infinite;
+        }
+
+        .emoji-card.card-cal .big-emoji {
+            animation-delay: 0.6s;
+        }
+
+        .emoji-card.card-micro .big-emoji {
+            animation-delay: 1.2s;
+        }
+
+        @keyframes emojiFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-5px) scale(1.05);
+            }
+        }
+
+        .emoji-card .card-label {
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            color: rgba(255, 255, 255, 0.82);
+            text-transform: uppercase;
+        }
+
+        .emoji-glow-ring {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            filter: blur(14px);
+            opacity: 0.4;
+        }
+
+        .card-rocket .emoji-glow-ring {
+            background: #00d4ff;
+        }
+
+        .card-cal .emoji-glow-ring {
+            background: #7bcf64;
+        }
+
+        .card-micro .emoji-glow-ring {
+            background: #b464ff;
+        }
+
+        /* ── CTA Mini Cards ── */
+        .cta-cards {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cta-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.22);
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .cta-card.primary {
+            background: linear-gradient(135deg, #0066cc, #0052a3);
+            border-color: transparent;
+            box-shadow: 0 4px 14px rgba(0, 102, 204, 0.4);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-card.primary:hover {
+            box-shadow: 0 10px 28px rgba(0, 102, 204, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">🦷</span>
+            <span>ORAL CARE-X-AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active" data-lang="nav_home">Home</a></li>
+            <li><a href="about.html" data-lang="nav_about">About</a></li>
+            <li><a href="diseases.html" data-lang="nav_diseases">Diseases</a></li>
+            <li><a href="analyze.html" data-lang="nav_analyze">Analyze</a></li>
+            <li><a href="appointment.html" data-lang="nav_appointment">Book Appointment</a></li>
+            <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <select id="language-selector" class="lang-selector" onchange="Translations.set(this.value)">
+                <option value="en">🇺🇸 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+            </select>
+            <a href="login.html" class="nav-btn" data-lang="nav_login" id="loginBtn">Login</a>
+            <div id="userProfile" style="display:none; align-items:center; gap:10px; color:white;">
+                <img id="userAvatar" src="" alt="avatar" style="width:34px;height:34px;border-radius:50%;object-fit:cover;display:inline-block;margin-left:8px;">
+                <span id="userName" style="font-weight:600;margin-left:6px;"></span>
+                <button id="logoutBtn" class="nav-btn" style="margin-left:10px;padding:6px 10px;">Logout</button>
+            </div>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section with Video -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+
+            <!-- LEFT: Text + Emoji Cards --> 
+            <div class="hero-text">
+                <h1 data-lang="hero_title">ORAL CARE-X-AI-Enhances Diagnostics using CNN Algorithm</h1>
+                <p data-lang="hero_subtitle">Experience the future of dental care with our advanced CNN-based diagnostic
+                    system. Upload your
+                    dental X-ray or image and get instant, accurate analysis of potential dental issues.</p>
+
+                <!-- Emoji Showcase Cards -->
+                <div class="hero-buttons">
+                    <div class="emoji-showcase">
+                        <a href="getstarted.html" class="emoji-card card-rocket">
+                            <div class="emoji-glow-ring"></div>
+                            <span class="big-emoji">🚀</span>
+                            <span class="card-label">Get Started</span>
+                        </a>
+                        <a href="appointment.html" class="emoji-card card-cal">
+                            <div class="emoji-glow-ring"></div>
+                            <span class="big-emoji">📅</span>
+                            <span class="card-label"> Book Appointment</span>
+                        </a>
+                        <a href="analyze.html" class="emoji-card card-micro">
+                            <div class="emoji-glow-ring"></div>
+                            <span class="big-emoji">🔬</span>
+                            <span class="card-label">Analyze</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Video -->
+            <div class="hero-visual">
+                <div class="hero-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Dental.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2 data-lang="features_title">Why to Choose ORAL CARE X ?</h2>
+            <p data-lang="features_subtitle">State-of-the-art technology combined with medical expertise for accurate
+                dental diagnostics</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3 data-lang="feature_ai">AI-Powered Analysis</h3>
+                <p data-lang="feature_ai_desc">Our CNN-based model analyzes dental images with high accuracy, detecting
+                    cavities, gum disease, and
+                    other conditions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 data-lang="feature_instant">Instant Results</h3>
+                <p data-lang="feature_instant_desc">Get comprehensive diagnostic reports within seconds. No waiting, no
+                    appointments needed for initial
+                    screening.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 data-lang="feature_secure">Secure & Private</h3>
+                <p data-lang="feature_secure_desc">Your dental data is encrypted and protected. We prioritize your
+                    privacy and comply with healthcare
+                    standards.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 data-lang="feature_reports">Detailed Reports</h3>
+                <p data-lang="feature_reports_desc">Receive comprehensive analysis with condition severity,
+                    recommendations, and preventive care
+                    suggestions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 data-lang="feature_accuracy">High Accuracy</h3>
+                <p data-lang="feature_accuracy_desc">Trained on thousands of dental images, our AI achieves exceptional
+                    accuracy in detecting dental
+                    conditions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3 data-lang="feature_chatbot">AI Chatbot Support</h3>
+                <p data-lang="feature_chatbot_desc">Chat with our AI assistant anytime for quick answers about dental
+                    symptoms and oral health questions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Scans Analyzed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">Accuracy Rate</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Happy Users</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">AI Support</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>What Our Users Say</h2>
+            <p>Trusted by thousands of users for accurate dental diagnostics</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"ORAL CARE-X-AI detected a cavity that my regular checkup missed. The AI
+                    analysis was spot-on and helped me get treatment early!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨</div>
+                    <div class="author-info">
+                        <h4>Rahul Sharma</h4>
+                        <span>Software Engineer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As a busy professional, I love how quick and easy it is to get a
+                    preliminary dental analysis. The chatbot is incredibly helpful!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <h4>Priya Patel</h4>
+                        <span>Business Analyst</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The detailed reports and recommendations have helped me maintain better
+                    oral health. Highly recommend this AI tool!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨‍⚕️</div>
+                    <div class="author-info">
+                        <h4>Dr. Vamshitha Kumari</h4>
+                        <span>Dental Practitioner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section (Hidden by default, shown after login) -->
+    <section class="upload-section hidden" id="upload-section">
+        <div class="upload-container">
+            <div class="upload-card">
+                <h2>Upload Dental Image</h2>
+                <p class="subtitle">Upload an X-ray or dental photo for AI analysis</p>
+                <label class="upload-zone" for="imageInput">
+                    <div class="icon">📤</div>
+                    <p>Drag & drop your image here or click to browse</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">Supports: JPG, PNG, DICOM</p>
+                    <input type="file" id="imageInput" accept="image/*">
+                </label>
+                <p id="uploadMsg" class="login-msg"></p>
+                <button class="login-btn" onclick="classifyImage()">🔍 Analyze Image</button>
+                <button class="btn-secondary mt-20" style="width: 100%; padding: 14px;"
+                    onclick="showSection('home-view')">← Back to Home</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Section (Hidden by default) -->
+    <section class="report-section hidden" id="report-section">
+        <div class="report-card">
+            <div class="report-header">
+                <h2>📋 Diagnosis Report</h2>
+                <span class="report-status" id="status">Analysis Complete</span>
+            </div>
+            <div class="report-item">
+                <span class="report-label">Detected Condition</span>
+                <span class="report-value" id="disease">-</span>
+            </div>
+            <div class="report-item">
+                <span class="report-label">Confidence Level</span>
+                <span class="report-value">High (94%)</span>
+            </div>
+            <div class="report-item">
+                <span class="report-label">Severity</span>
+                <span class="report-value" id="severity">Moderate</span>
+            </div>
+            <div style="margin-top: 30px;">
+                <h3 style="color: var(--accent); margin-bottom: 15px;">Recommendations</h3>
+                <ul class="recommendations-list" id="recommendation"></ul>
+            </div>
+            <div style="display: flex; gap: 15px; margin-top: 30px;">
+                <button class="btn-secondary" style="flex: 1; padding: 14px;"
+                    onclick="showSection('upload-section')">New Scan</button>
+                <button class="btn-primary" style="flex: 1; padding: 14px;" onclick="window.print()">Download
+                    Report</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🦷</span>
+                    <span>ORAL CARE-X-AI</span>
+                </a>
+                <p data-lang="footer_desc">Advanced AI-powered dental diagnostics for everyone. Making dental health
+                    accessible and affordable.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4 data-lang="footer_quick_links">Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="diseases.html">Diseases</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4 data-lang="footer_services">Services</h4>
+                <ul>
+                    <li><a href="#">AI Diagnosis</a></li>
+                    <li><a href="#">Dental Chatbot</a></li>
+                    <li><a href="#">Health Reports</a></li>
+                    <li><a href="#">Expert Consultation</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4 data-lang="footer_legal">Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-lang="footer_copyright">© 2026 ORAL CARE-X-AI-Enhances Diagnostics using CNN algorithm. All rights
+                reserved. | Powered by
+                CNN-based Medical AI</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot Button -->
+    <button class="chatbot-btn" onclick="toggleChatbot()" id="chatbot-btn">
+        💬
+    </button>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">🦷</div>
+            <div class="chatbot-info">
+                <h4>Dental AI Assistant</h4>
+                <span>● Online</span>
+            </div>
+            <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="chat-message bot">
+                Hello! 👋 I'm your Dental AI Assistant. I can help you identify dental symptoms and provide information
+                about various dental conditions. How can I help you today?
+            </div>
+        </div>
+        <div class="quick-responses">
+            <button class="quick-btn" onclick="quickResponse('toothache')">Toothache</button>
+            <button class="quick-btn" onclick="quickResponse('bleeding gums')">Bleeding Gums</button>
+            <button class="quick-btn" onclick="quickResponse('bad breath')">Bad Breath</button>
+            <button class="quick-btn" onclick="quickResponse('sensitivity')">Sensitivity</button>
+            <button class="quick-btn" onclick="quickResponse('swollen gums')">Swollen Gums</button>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Describe your symptoms..."
+                onkeypress="handleChatKeypress(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script src="doctors.js"></script>
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Initialize language selector on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const selector = document.getElementById('language-selector');
+            const currentLang = localStorage.getItem('oralcare_language') || 'en';
+            if (selector) {
+                selector.value = currentLang;
+            }
+            // Show profile on home if user is logged in
+            const loginBtn = document.getElementById('loginBtn');
+            const userProfile = document.getElementById('userProfile');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            function showUserProfile() {
+                const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+                if (!userProfile) return;
+
+                if (isLoggedIn) {
+                    const email = sessionStorage.getItem('userEmail');
+                    const users = JSON.parse(localStorage.getItem('users')) || [];
+                    const user = users.find(u => u.email === email) || { name: email };
+
+                    if (loginBtn) loginBtn.style.display = 'none';
+                    userProfile.style.display = 'flex';
+                    userName.textContent = user.name || email;
+                    // generate an avatar using ui-avatars as fallback
+                    userAvatar.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.name || email) + '&background=0066cc&color=fff&rounded=true';
+
+                    logoutBtn.onclick = function () {
+                        sessionStorage.clear();
+                        // Optionally you can also redirect to login page
+                        window.location.href = 'index.html';
+                    };
+                } else {
+                    if (loginBtn) loginBtn.style.display = '';
+                    userProfile.style.display = 'none';
+                }
+            }
+
+            showUserProfile();
+        });
+    </script>
+</body>
+
+</html>

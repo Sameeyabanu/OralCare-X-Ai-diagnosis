@@ -8,6 +8,8 @@
         content="Learn about common dental diseases - symptoms, causes, and treatments. ORAL CARE AI provides comprehensive information.">
     <title>Dental Diseases - ORAL CARE AI </title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/disease-steps.css">
+    <link rel="stylesheet" href="assets/animations.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
@@ -83,15 +85,22 @@
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1>Dental Diseases Guide</h1>
-        <p>Understanding common dental conditions, their symptoms, and treatments</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
+            <div>
+                <h1>Dental Diseases Guide</h1>
+                <p>Understanding common dental conditions, their symptoms, and treatments</p>
+            </div>
+            <div style="max-width: 140px; border: none; padding: 0; background: transparent; margin: 0; position: relative;">
+                <img src="Sameeya.png" alt="Sameeya" style="width: 100%; height: auto; border: none; display: block; background: transparent; filter: drop-shadow(0 20px 40px rgba(0, 20, 50, 0.6)) drop-shadow(0 10px 20px rgba(0, 100, 200, 0.3)); opacity: 0.95; mix-blend-mode: screen; box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.1), 0 0 50px rgba(0, 212, 255, 0.15); border-radius: 50%;" />
+            </div>
+        </div>
     </section>
 
     <!-- Diseases Section -->
     <section class="diseases-section">
         <div class="diseases-grid">
             <!-- Cavities -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image">
                     <!-- Replace src with your image path, e.g., src="images/cavities.jpg" -->
                     <img src="dental cavity.jpeg" alt="Dental Cavities"
@@ -115,7 +124,7 @@
             </div>
 
             <!-- Gingivitis -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #ff6b6b, #ee5a5a);">
                     <!-- Replace src with your image path, e.g., src="images/gingivitis.jpg" -->
                     <img src="Gingivity.jpeg" alt="Gingivitis"
@@ -139,7 +148,7 @@
             </div>
 
             <!-- Periodontitis -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #a55eea, #8854d0);">
                     <!-- Replace src with your image path, e.g., src="images/periodontitis.jpg" -->
                     <img src="periodentiteses.jpeg" alt="Periodontitis"
@@ -163,7 +172,7 @@
             </div>
 
              <!-- Tooth Abscess -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #ff7675, #d63031);">
                     <!-- Replace src with your image path, e.g., src="images/tooth-abscess.jpg" -->
                     <img src="tooth abases.jpeg" alt="Tooth Abscess"
@@ -187,7 +196,7 @@
             </div>
 
             <!-- Tooth Sensitivity -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #4ecdc4, #26d0ce);">
                     <!-- Replace src with your image path, e.g., src="images/sensitivity.jpg" -->
                     <img src="tooth sensitivity.jpeg" alt="Tooth Sensitivity"
@@ -210,7 +219,7 @@
             </div>
 
             <!-- Oral Thrush -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
                     <!-- Replace src with your image path, e.g., src="images/oral-thrush.jpg" -->
                     <img src="oral thrush.jpeg" alt="Oral Thrush"
@@ -234,7 +243,7 @@
             </div>
 
             <!-- Oral Infection -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #ff7675, #d63031);">
                     <!-- Replace src with your image path, e.g., src="images/tooth-abscess.jpg" -->
                     <img src="Oral Infections.jpeg" alt="Tooth Abscess"
@@ -258,7 +267,7 @@
             </div>
 
             <!-- Bruxism -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">
                     <!-- Replace src with your image path, e.g., src="images/bruxism.jpg" -->
                     <img src="bruxism.jpeg" alt="Bruxism"
@@ -281,7 +290,7 @@
             </div>
 
             <!-- Oral Cancer -->
-            <div class="disease-card">
+            <div class="disease-card stagger-item">
                 <div class="disease-image" style="background: linear-gradient(135deg, #636e72, #2d3436);">
                     <!-- Replace src with your image path, e.g., src="images/oral-cancer.jpg" -->
                     <img src="oral cancer.jpeg" alt="Oral Cancer"
@@ -312,32 +321,32 @@
                 <p>Maintain optimal oral health with these essential practices</p>
             </div>
             <div class="features-grid" style="margin-top: 40px;">
-                <div class="feature-card">
+                <div class="feature-card stagger-item">
                     <div class="feature-icon">🪥</div>
                     <h3>Brush Twice Daily</h3>
                     <p>Use fluoride toothpaste and brush for at least 2 minutes, morning and night.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card stagger-item">
                     <div class="feature-icon">🧵</div>
                     <h3>Floss Daily</h3>
                     <p>Flossing removes plaque and food particles between teeth where brushes can't reach.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card stagger-item">
                     <div class="feature-icon">🥗</div>
                     <h3>Healthy Diet</h3>
                     <p>Limit sugary foods and drinks. Eat calcium-rich foods for strong teeth.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card stagger-item">
                     <div class="feature-icon">🦷</div>
                     <h3>Regular Checkups</h3>
                     <p>Visit your dentist every 6 months for professional cleaning and examination.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card stagger-item">
                     <div class="feature-icon">🚭</div>
                     <h3>Avoid Tobacco</h3>
                     <p>Smoking and tobacco use significantly increase risk of gum disease and oral cancer.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card stagger-item">
                     <div class="feature-icon">💧</div>
                     <h3>Stay Hydrated</h3>
                     <p>Water helps wash away food particles and keeps your mouth moist and healthy.</p>
@@ -346,12 +355,11 @@
         </div>
 
         <!-- CTA Section -->
-        <div style="max-width: 800px; margin: 80px auto 0; text-align: center;">
-            <div class="hero-card" style="max-width: 100%;">
-                <h2 style="color: var(--white); margin-bottom: 15px;">Concerned About Your Dental Health?</h2>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 25px;">Upload a dental image and let our AI
-                    analyze it for potential issues. Get instant results and personalized recommendations.</p>
-                <a href="index.html#login-section" class="btn-primary">🔍 Start AI Diagnosis</a>
+        <div style="max-width: 1000px; margin: 80px auto 0; text-align: center;">
+            <div class="hero-card" style="max-width: 100%; padding: 28px;">
+                <h2 style="color: var(--white); margin-bottom: 8px;">Concerned About Your Dental Health?</h2>
+                <p style="color: rgba(255,255,255,0.75); margin-bottom: 18px;">Upload a dental image and let our AI analyze it for potential issues. Get instant results and personalized recommendations.</p>
+                <a href="oral-care-tips.html" class="btn-primary">🔍 Start AI Diagnosis</a>
             </div>
         </div>
     </section>

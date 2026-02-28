@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive animated oral care tips and best practices for maintaining healthy teeth and gums.">
+    <title>Oral Care Tips - ORAL CARE AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --accent: #00d4ff;
+            --success: #4ade80;
+            --danger: #ff6b6b;
+            --dark: #061428;
+            --light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #061428 0%, #0a1f3a 100%);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(6, 20, 40, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #0052a3;
+        }
+
+        /* Header Section */
+        .page-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #00d4ff, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Tips Grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        /* Tip Card */
+        .tip-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        /* SVG Animation Container */
+        .animation-container {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .animation-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .tip-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .tip-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideInOut {
+            0% { transform: translateX(-100px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100px); opacity: 0; }
+        }
+
+        @keyframes fill {
+            0% { fill: rgba(255,255,255,0.1); }
+            50% { fill: rgba(74, 222, 128, 0.5); }
+            100% { fill: rgba(255,255,255,0.1); }
+        }
+
+        .animate-bounce { animation: bounce 1.5s infinite ease-in-out; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-rotate { animation: rotate 3s linear infinite; }
+        .animate-fill { animation: fill 2s infinite; }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 60px 20px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(74, 222, 128, 0.1));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 60px auto;
+        }
+
+        .cta-section h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc, #0052a3);
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 20px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">🦷</span>
+            <span>ORAL CARE-X-AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="diseases.html">Diseases</a></li>
+            <li><a href="analyze.html">Analyze</a></li>
+        </ul>
+        <a href="login.html" class="nav-btn">Login</a>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
+            <div>
+                <h1>💡 Daily Oral Care Tips</h1>
+                <p>Learn the best practices for maintaining healthy teeth and gums. Each step shown with easy-to-follow animated guides.</p>
+            </div>
+            <div style="max-width: 140px;">
+                <img src="assets/cartoon-tooth-mascot.svg" alt="Happy Tooth Mascot" style="width: 100%; height: auto; animation: float 4s ease-in-out infinite;" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Grid -->
+    <section class="tips-grid">
+        <!-- Tip 1: Brushing Teeth -->
+        <div class="tip-card stagger-item">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <img src="assets/personalized-kid-brushing.svg" alt="Kid Brushing Teeth" style="width: 100%; height: auto; max-width: 160px;" />
+            </div>
+            <h3 class="tip-title">Brush Twice Daily</h3>
+            <p class="tip-description">Brush your teeth for at least 2 minutes using fluoride toothpaste. Brush morning and night to remove plaque and prevent cavities.</p>
+        </div>
+
+        <!-- Tip 2: Flossing -->
+        <div class="tip-card stagger-item">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <img src="assets/personalized-kid-flossing.svg" alt="Kid Flossing Daily" style="width: 100%; height: auto; max-width: 160px;" />
+            </div>
+            <h3 class="tip-title">Floss Daily</h3>
+            <p class="tip-description">Use dental floss to clean between teeth where your toothbrush cannot reach. Do this at least once daily to remove plaque.</p>
+        </div>
+
+        <!-- Tip 3: Mouth Washing -->
+        <div class="tip-card stagger-item">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <img src="assets/personalized-kid-rinsing.svg" alt="Kid Rinsing Mouth" style="width: 100%; height: auto; max-width: 160px;" />
+            </div>
+            <h3 class="tip-title">Rinse with Mouthwash</h3>
+            <p class="tip-description">Use antiseptic or fluoride mouthwash twice daily for 30 seconds. This helps kill bacteria and strengthen your enamel.</p>
+        </div>
+
+        <!-- Tip 4: Avoid Sugary Foods -->
+        <div class="tip-card stagger-item">
+            <div class="animation-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Chocolate -->
+                    <rect x="50" y="60" width="50" height="40" fill="#8B5A3C" rx="6" />
+                    <circle cx="70" cy="75" r="4" fill="#fff" opacity="0.6" />
+                    <circle cx="85" cy="80" r="4" fill="#fff" opacity="0.6" />
+                    <!-- NO symbol -->
+                    <circle cx="130" cy="80" r="40" fill="none" stroke="#FF6B6B" stroke-width="4" />
+                    <line x1="105" y1="55" x2="155" y2="105" stroke="#FF6B6B" stroke-width="4" />
+                </svg>
+            </div>
+            <h3 class="tip-title">Avoid Sugary Foods</h3>
+            <p class="tip-description">Limit candies, chocolates, and sugary drinks. Sugar feeds harmful bacteria that cause cavities. Choose water instead.</p>
+        </div>
+
+        <!-- Tip 5: Limit Acidic Drinks -->
+        <div class="tip-card stagger-item">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <img src="assets/personalized-kid-avoiding-sugar.svg" alt="Kid Avoiding Sugar" style="width: 100%; height: auto; max-width: 160px;" />
+            </div>
+            <h3 class="tip-title">Limit Acidic Drinks</h3>
+            <p class="tip-description">Reduce consumption of soda, citrus juices, and sports drinks. Acids erode tooth enamel. Drink water instead.</p>
+        </div>
+
+        <!-- Tip 6: Regular Checkups -->
+        <div class="tip-card stagger-item">
+            <div class="animation-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Calendar -->
+                    <rect x="45" y="50" width="110" height="90" fill="none" stroke="#00d4ff" stroke-width="3" rx="6" />
+                    <!-- Calendar header -->
+                    <rect x="45" y="50" width="110" height="15" fill="#00d4ff" opacity="0.3" />
+                    <!-- Dates -->
+                    <circle cx="75" cy="85" r="8" fill="none" stroke="#4ade80" stroke-width="2" class="animate-pulse" />
+                    <circle cx="105" cy="85" r="8" fill="none" stroke="#4ade80" stroke-width="2" style="animation: pulse 2s infinite 0.5s;" />
+                    <circle cx="135" cy="85" r="8" fill="none" stroke="#4ade80" stroke-width="2" style="animation: pulse 2s infinite 1s;" />
+                    <!-- Checkmark -->
+                    <path d="M 90 120 L 100 130 L 120 110" stroke="#4ade80" stroke-width="3" fill="none" class="animate-pulse" />
+                </svg>
+            </div>
+            <h3 class="tip-title">Visit Dentist Every 6 Months</h3>
+            <p class="tip-description">Schedule regular dental checkups and professional cleanings. Early detection prevents serious problems.</p>
+        </div>
+
+        <!-- Tip 7: Stay Hydrated -->
+        <div class="tip-card stagger-item">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <img src="assets/cartoon-water-droplet.svg" alt="Water Droplet" style="width: 80px; height: auto;" />
+            </div>
+            <h3 class="tip-title">Stay Hydrated</h3>
+            <p class="tip-description">Drink plenty of water throughout the day. Water helps wash away food particles and keeps your mouth moist.</p>
+        </div>
+
+        <!-- Tip 8: Don't Skip Meals -->
+        <div class="tip-card stagger-item">
+            <div class="animation-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Plate -->
+                    <circle cx="100" cy="100" r="70" fill="none" stroke="#00d4ff" stroke-width="3" />
+                    <!-- Foods -->
+                    <circle cx="75" cy="85" r="15" fill="#90EE90" class="animate-bounce" />
+                    <path d="M 115 90 L 125 80 L 130 95 L 120 100 Z" fill="#FFB347" style="animation: bounce 1.5s infinite 0.2s;" />
+                    <circle cx="100" cy="110" r="12" fill="#FF6B6B" style="animation: bounce 1.5s infinite 0.4s;" />
+                    <!-- Checkmark -->
+                    <path d="M 100 140 L 90 150 L 80 140" stroke="#4ade80" stroke-width="3" fill="none" class="animate-pulse" />
+                </svg>
+            </div>
+            <h3 class="tip-title">Eat Healthy Foods</h3>
+            <p class="tip-description">Include calcium-rich foods like milk, cheese, and green vegetables. A balanced diet keeps teeth and gums strong.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 25px; flex-wrap: wrap;">
+            <div>
+                <h2>Ready for Professional Diagnosis?</h2>
+                <p>Now that you know the best practices, let our AI analyze your teeth for any concerns. Upload an image and get instant insights.</p>
+                <a href="analyze.html?action=upload" class="btn-primary">Start AI Diagnosis →</a>
+            </div>
+            <div style="max-width: 130px;">
+                <img src="assets/cartoon-celebration.svg" alt="Celebration" style="width: 100%; height: auto; animation: bounce 2s ease-in-out infinite;" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 ORAL CARE-X-AI. Advanced Dental Diagnostics using AI Technology.</p>
+    </footer>
+</body>
+
+</html>

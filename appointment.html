@@ -34,7 +34,7 @@
             <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
-             <select id="language-selector" class="lang-selector" onchange="Translations.set(this.value)">
+            <select id="language-selector" class="lang-selector" onchange="Translations.set(this.value)">
                 <option value="en">🇺🇸 English</option>
                 <option value="hi">🇮🇳 हिंदी</option>
                 <option value="ml">🇮🇳 മലയാളം</option>
@@ -53,8 +53,15 @@
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1 data-lang="apt_title">Book Your Appointment</h1>
-        <p data-lang="apt_subtitle">Schedule a visit with our expert dental specialists</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
+            <div>
+                <h1 data-lang="apt_title">Book Your Appointment</h1>
+                <p data-lang="apt_subtitle">Schedule a visit with our expert dental specialists</p>
+            </div>
+            <div style="max-width: 140px; border: none; padding: 0; background: transparent; margin: 0; position: relative;">
+                <img src="Sameeya.png" alt="Sameeya" style="width: 100%; height: auto; border: none; display: block; background: transparent; filter: drop-shadow(0 20px 40px rgba(0, 20, 50, 0.6)) drop-shadow(0 10px 20px rgba(0, 100, 200, 0.3)); opacity: 0.95; mix-blend-mode: screen; box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.1), 0 0 50px rgba(0, 212, 255, 0.15); border-radius: 50%;" />
+            </div>
+        </div>
     </section>
 
     <!-- Appointment Section -->
@@ -509,6 +516,5 @@
         }
     </script>
 </body>
-
 
 </html>

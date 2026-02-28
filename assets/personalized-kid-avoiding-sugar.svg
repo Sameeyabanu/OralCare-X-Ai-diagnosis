@@ -1,0 +1,106 @@
+<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @keyframes pushAway {
+                0%, 30%, 70%, 100% { transform: translateX(0px); }
+                50% { transform: translateX(-15px); }
+            }
+            @keyframes pullClose {
+                0%, 30%, 70%, 100% { transform: translateX(0px); }
+                50% { transform: translateX(15px); }
+            }
+            @keyframes bounce {
+                0%, 100% { transform: scale(1) rotate(0deg); }
+                50% { transform: scale(1.1) rotate(5deg); }
+            }
+            .push-hand { animation: pushAway 1.5s infinite ease-in-out; }
+            .pull-hand { animation: pullClose 1.5s infinite ease-in-out; }
+            .checkmark { animation: bounce 1.5s infinite ease-in-out; }
+        </style>
+    </defs>
+    
+    <!-- Hijab (dark navy) -->
+    <ellipse cx="100" cy="40" rx="50" ry="45" fill="#1a1a3e"/>
+    <path d="M 50 45 Q 40 80 45 120 L 155 120 Q 160 80 150 45 Q 125 20 100 20 Q 75 20 50 45" fill="#1a1a3e"/>
+    
+    <!-- Face (peach skin tone) -->
+    <circle cx="100" cy="70" r="45" fill="#f4b89d"/>
+    
+    <!-- Cheeks blush (determined) -->
+    <circle cx="75" cy="85" r="8" fill="#ff9999" opacity="0.6"/>
+    <circle cx="125" cy="85" r="8" fill="#ff9999" opacity="0.6"/>
+    
+    <!-- Eyes (determined expression) -->
+    <circle cx="85" cy="65" r="6" fill="#8b4513"/>
+    <circle cx="115" cy="65" r="6" fill="#8b4513"/>
+    <!-- Eye shine -->
+    <circle cx="87" cy="63" r="2" fill="#ffffff"/>
+    <circle cx="117" cy="63" r="2" fill="#ffffff"/>
+    
+    <!-- Eyebrows (slightly narrowed) -->
+    <path d="M 78 55 Q 85 52 92 55" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M 108 55 Q 115 52 122 55" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Nose -->
+    <path d="M 100 65 L 100 80" stroke="#d4a580" stroke-width="1.5" fill="none"/>
+    
+    <!-- Determined smile -->
+    <path d="M 88 90 Q 100 96 112 90" stroke="#ff6b9d" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Neck -->
+    <rect x="88" y="110" width="24" height="15" fill="#f4b89d"/>
+    
+    <!-- Body - Business casual shirt (white) -->
+    <rect x="60" y="125" width="80" height="70" fill="#ffffff" rx="8"/>
+    
+    <!-- Dark blazer/jacket -->
+    <path d="M 60 125 L 50 130 L 50 190 Q 50 200 60 200 L 140 200 Q 150 200 150 190 L 150 130 L 140 125 Z" fill="#2a2a4e" opacity="0.9"/>
+    
+    <!-- Button details -->
+    <circle cx="100" cy="145" r="2" fill="#c0c0c0"/>
+    <circle cx="100" cy="165" r="2" fill="#c0c0c0"/>
+    
+    <!-- Right arm (pushing away soda - animated) -->
+    <g class="push-hand">
+        <rect x="110" y="130" width="20" height="50" fill="#f4b89d" rx="10"/>
+        <circle cx="120" cy="185" r="10" fill="#f4b89d"/>
+        
+        <!-- Soda can being pushed -->
+        <rect x="130" y="140" width="15" height="35" fill="#FF4444" rx="3"/>
+        <ellipse cx="137.5" cy="140" rx="7.5" ry="4" fill="#FF6666"/>
+        <!-- Straw -->
+        <rect x="135" y="120" width="3" height="20" fill="#FFD700"/>
+        <!-- X mark on can (bad) -->
+        <line x1="133" y1="145" x2="142" y2="160" stroke="#ffffff" stroke-width="1.5"/>
+        <line x1="142" y1="145" x2="133" y2="160" stroke="#ffffff" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Left arm (holding apple - animated) -->
+    <g class="pull-hand">
+        <rect x="70" y="130" width="20" height="50" fill="#f4b89d" rx="10"/>
+        <circle cx="80" cy="185" r="10" fill="#f4b89d"/>
+        
+        <!-- Apple -->
+        <circle cx="50" cy="155" r="12" fill="#4ade80"/>
+        <!-- Apple stem -->
+        <rect x="49" y="140" width="2" height="16" fill="#8B4513"/>
+        <!-- Apple leaf -->
+        <ellipse cx="58" cy="145" rx="5" ry="3" fill="#4ade80" transform="rotate(45 58 145)"/>
+        
+        <!-- Checkmark/approval -->
+        <g class="checkmark" style="transform-origin: 50px 175px;">
+            <path d="M 45 175 L 50 182 L 60 170" stroke="#90EE90" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+    </g>
+    
+    <!-- Star symbol for health -->
+    <path d="M 35 130 L 38 138 L 46 138 L 40 143 L 42 151 L 35 146 L 28 151 L 30 143 L 24 138 L 32 138 Z" fill="#FFD700" opacity="0.8"/>
+    
+    <!-- Legs -->
+    <rect x="80" y="200" width="16" height="40" fill="#1a1a3e"/>
+    <rect x="104" y="200" width="16" height="40" fill="#1a1a3e"/>
+    
+    <!-- Shoes -->
+    <ellipse cx="88" cy="245" rx="12" ry="8" fill="#333333"/>
+    <ellipse cx="112" cy="245" rx="12" ry="8" fill="#333333"/>
+</svg>

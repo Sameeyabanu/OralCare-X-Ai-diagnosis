@@ -1,0 +1,415 @@
+/* Enhanced Animation Styles */
+
+/* Animated Loading Spinner with Teeth Analysis */
+.loading-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(74, 222, 128, 0.05));
+    border-radius: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.spinner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 24px;
+}
+
+/* Nested ring spinner */
+.spinner::before,
+.spinner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+.spinner::before {
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-top-color: #00d4ff;
+    border-right-color: #00d4ff;
+}
+
+.spinner::after {
+    width: 85%;
+    height: 85%;
+    top: 7.5%;
+    left: 7.5%;
+    border: 2px solid transparent;
+    border-bottom-color: #4ade80;
+    border-left-color: #4ade80;
+    animation-duration: 1.5s;
+    animation-direction: reverse;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animated scanning beam effect */
+.scanner-beam {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    animation: scanBeam 1.5s ease-in-out infinite;
+    filter: blur(1px);
+}
+
+@keyframes scanBeam {
+    0%, 100% {
+        top: 20%;
+    }
+    50% {
+        top: 80%;
+    }
+}
+
+.loading-animation p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    animation: fadeInOut 2s ease-in-out infinite;
+    margin-top: 16px;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Animated SVG tooth scanner */
+.tooth-scanner {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+}
+
+.tooth-scanner svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+}
+
+.tooth-outline {
+    stroke: #00d4ff;
+    stroke-width: 2;
+    fill: none;
+    animation: toothPulse 1.5s ease-in-out infinite;
+}
+
+.tooth-fill {
+    fill: #4ade80;
+    opacity: 0;
+    animation: toothFill 1.5s ease-in-out infinite;
+}
+
+@keyframes toothPulse {
+    0%, 100% {
+        stroke-width: 2;
+        opacity: 0.6;
+    }
+    50% {
+        stroke-width: 3;
+        opacity: 1;
+    }
+}
+
+@keyframes toothFill {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Pulse dots indicator */
+.pulse-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 20px 0;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00d4ff;
+    animation: pulseDot 1.5s ease-in-out infinite;
+}
+
+.pulse-dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.pulse-dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulseDot {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Floating animation for hero elements */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-8px) rotate(2deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-8px) rotate(-2deg);
+    }
+}
+
+.float-animation {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Glow effect */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.3), inset 0 0 10px rgba(0, 212, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), inset 0 0 20px rgba(0, 212, 255, 0.2);
+    }
+}
+
+.glow-element {
+    animation: glow 3s ease-in-out infinite;
+}
+
+/* Slide in animation */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-up {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer-loading {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 8px;
+}
+
+/* Animated gradient text */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-text {
+    background: linear-gradient(270deg, #00d4ff, #4ade80, #00d4ff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+}
+
+/* Wave animation for SVG elements */
+@keyframes wave {
+    0%, 100% {
+        d: path("M0,50 Q15,40 30,50 T60,50 T90,50");
+    }
+    50% {
+        d: path("M0,40 Q15,30 30,40 T60,40 T90,40");
+    }
+}
+
+.wave-path {
+    animation: wave 2s ease-in-out infinite;
+}
+
+/* Scale bounce animation */
+@keyframes scaleBounce {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.scale-bounce {
+    animation: scaleBounce 1.5s ease-in-out infinite;
+}
+
+/* Rotate animation */
+@keyframes rotateSmooth {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate-animation {
+    animation: rotateSmooth 3s linear infinite;
+}
+
+/* Neon glow effect */
+.neon-glow {
+    text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff;
+    animation: neonFlicker 0.15s infinite;
+}
+
+@keyframes neonFlicker {
+    0%, 100% {
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff;
+    }
+    50% {
+        text-shadow: 0 0 5px #00d4ff, 0 0 10px #00d4ff, 0 0 15px #00d4ff;
+    }
+}
+
+/* Animated border */
+@keyframes borderFlow {
+    0% {
+        border-image-source: linear-gradient(90deg, #00d4ff, #4ade80, #00d4ff);
+        border-image-slice: 1;
+    }
+    50% {
+        border-image-source: linear-gradient(90deg, #4ade80, #00d4ff, #4ade80);
+        border-image-slice: 1;
+    }
+    100% {
+        border-image-source: linear-gradient(90deg, #00d4ff, #4ade80, #00d4ff);
+        border-image-slice: 1;
+    }
+}
+
+.animated-border {
+    border: 2px solid;
+    animation: borderFlow 2s linear infinite;
+}
+
+/* Success checkmark animation */
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 50;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.checkmark-path {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: checkmark 0.8s ease-out forwards;
+}
+
+/* Bounce in animation */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Staggered animation for list items */
+.stagger-item {
+    animation: slideInUp 0.6s ease-out;
+}
+
+.stagger-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.stagger-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.stagger-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.stagger-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.stagger-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.stagger-item:nth-child(6) {
+    animation-delay: 0.6s;
+}

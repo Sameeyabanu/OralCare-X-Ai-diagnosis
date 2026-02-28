@@ -1,0 +1,87 @@
+<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @keyframes brushStroke {
+                0%, 100% { transform: rotate(-15deg); transform-origin: 110px 80px; }
+                50% { transform: rotate(15deg); transform-origin: 110px 80px; }
+            }
+            .brush-hand { animation: brushStroke 1s infinite ease-in-out; }
+        </style>
+    </defs>
+    
+    <!-- Hijab (dark navy) -->
+    <ellipse cx="100" cy="40" rx="50" ry="45" fill="#1a1a3e"/>
+    <path d="M 50 45 Q 40 80 45 120 L 155 120 Q 160 80 150 45 Q 125 20 100 20 Q 75 20 50 45" fill="#1a1a3e"/>
+    
+    <!-- Face (peach skin tone) -->
+    <circle cx="100" cy="70" r="45" fill="#f4b89d"/>
+    
+    <!-- Cheeks blush -->
+    <circle cx="75" cy="85" r="8" fill="#ff9999" opacity="0.6"/>
+    <circle cx="125" cy="85" r="8" fill="#ff9999" opacity="0.6"/>
+    
+    <!-- Eyes -->
+    <circle cx="85" cy="65" r="6" fill="#8b4513"/>
+    <circle cx="115" cy="65" r="6" fill="#8b4513"/>
+    <!-- Eye shine -->
+    <circle cx="87" cy="63" r="2" fill="#ffffff"/>
+    <circle cx="117" cy="63" r="2" fill="#ffffff"/>
+    
+    <!-- Eyebrows -->
+    <path d="M 78 55 Q 85 50 92 55" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M 108 55 Q 115 50 122 55" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Nose -->
+    <path d="M 100 65 L 100 80" stroke="#d4a580" stroke-width="1.5" fill="none"/>
+    
+    <!-- Smile -->
+    <path d="M 85 90 Q 100 98 115 90" stroke="#ff6b9d" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Upper lip -->
+    <path d="M 85 90 Q 100 93 115 90" stroke="#ff9999" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+    
+    <!-- Neck -->
+    <rect x="88" y="110" width="24" height="15" fill="#f4b89d"/>
+    
+    <!-- Body - Business casual shirt (white) -->
+    <rect x="60" y="125" width="80" height="70" fill="#ffffff" rx="8"/>
+    
+    <!-- Dark blazer/jacket -->
+    <path d="M 60 125 L 50 130 L 50 190 Q 50 200 60 200 L 140 200 Q 150 200 150 190 L 150 130 L 140 125 Z" fill="#2a2a4e" opacity="0.9"/>
+    
+    <!-- Button details on jacket -->
+    <circle cx="100" cy="145" r="2" fill="#c0c0c0"/>
+    <circle cx="100" cy="165" r="2" fill="#c0c0c0"/>
+    
+    <!-- Right arm (holding toothbrush) -animated -->
+    <g class="brush-hand">
+        <!-- Arm -->
+        <rect x="110" y="130" width="20" height="50" fill="#f4b89d" rx="10"/>
+        <!-- Hand -->
+        <circle cx="120" cy="185" r="10" fill="#f4b89d"/>
+        
+        <!-- Toothbrush -->
+        <rect x="105" y="70" width="8" height="60" fill="#ff4444" rx="4"/>
+        <!-- Bristles -->
+        <ellipse cx="109" cy="65" rx="6" ry="8" fill="#ffffff"/>
+        <line x1="105" y1="68" x2="113" y2="68" stroke="#ffffff" stroke-width="0.5"/>
+        <line x1="105" y1="72" x2="113" y2="72" stroke="#ffffff" stroke-width="0.5"/>
+        <line x1="105" y1="76" x2="113" y2="76" stroke="#ffffff" stroke-width="0.5"/>
+    </g>
+    
+    <!-- Left arm -->
+    <rect x="70" y="130" width="20" height="50" fill="#f4b89d" rx="10"/>
+    <!-- Left hand -->
+    <circle cx="80" cy="185" r="10" fill="#f4b89d"/>
+    
+    <!-- Legs -->
+    <rect x="80" y="200" width="16" height="40" fill="#1a1a3e"/>
+    <rect x="104" y="200" width="16" height="40" fill="#1a1a3e"/>
+    
+    <!-- Shoes -->
+    <ellipse cx="88" cy="245" rx="12" ry="8" fill="#333333"/>
+    <ellipse cx="112" cy="245" rx="12" ry="8" fill="#333333"/>
+    
+    <!-- Smile accent line -->
+    <path d="M 95 95 Q 100 97 105 95" stroke="#ff9999" stroke-width="0.5" fill="none" opacity="0.5"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-width: 100px;">
+  <!-- Cartoon Water Droplet Character -->
+  <defs>
+    <style>
+      .droplet { fill: #4ADECC; }
+      .eyes { fill: #000; }
+      .smile { stroke: #000; stroke-width: 1.5; fill: none; }
+      .shine { fill: white; opacity: 0.5; }
+    </style>
+  </defs>
+  
+  <!-- Main droplet shape -->
+  <path class="droplet" d="M 60 20 Q 80 40 80 70 Q 80 110 60 140 Q 40 110 40 70 Q 40 40 60 20 Z" />
+  
+  <!-- Shine on droplet -->
+  <ellipse class="shine" cx="50" cy="45" rx="12" ry="18" />
+  
+  <!-- Left eye -->
+  <circle class="eyes" cx="50" cy="60" r="4" />
+  <circle fill="white" cx="51" cy="59" r="1.5" />
+  
+  <!-- Right eye -->
+  <circle class="eyes" cx="70" cy="60" r="4" />
+  <circle fill="white" cx="71" cy="59" r="1.5" />
+  
+  <!-- Happy smile -->
+  <path class="smile" d="M 52 75 Q 60 82 68 75" stroke-linecap="round" />
+  
+  <!-- Cheeks -->
+  <circle fill="#FF9ECD" cx="42" cy="70" r="5" opacity="0.4" />
+  <circle fill="#FF9ECD" cx="78" cy="70" r="5" opacity="0.4" />
+</svg>

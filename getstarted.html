@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Get Started with ORAL CARE-X-AI - Use your camera or upload a photo to detect dental issues using our AI-powered CNN system.">
+    <title>Get Started - ORAL CARE-X-AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', var(--font-main);
+            background: linear-gradient(135deg, #0a1628 0%, #1e3c72 20%, #2a5298 40%, #0066cc 60%, #00a8e8 80%, #1e3c72 100%) !important;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* ── Hero Banner ─────────────────────────────── */
+        .gs-hero {
+            padding: 130px 5% 60px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .gs-hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #ffffff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .gs-hero p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 640px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+        }
+
+        .gs-hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ── Main Layout ─────────────────────────────── */
+        .gs-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 5% 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: start;
+        }
+
+        /* ── Camera Panel ────────────────────────────── */
+        .gs-camera-panel {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 32px 28px;
+            position: sticky;
+            top: 90px;
+        }
+
+        .gs-camera-panel h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .gs-camera-subtitle {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+        }
+
+        /* Camera viewport */
+        .gs-camera-viewport {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(0, 212, 255, 0.25);
+            margin-bottom: 16px;
+        }
+
+        #gs-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 14px;
+        }
+
+        #gs-canvas {
+            display: none;
+        }
+
+        .gs-camera-idle {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .gs-camera-idle .idle-icon {
+            font-size: 4rem;
+        }
+
+        .gs-camera-idle p {
+            font-size: 0.9rem;
+        }
+
+        .gs-overlay-ring {
+            position: absolute;
+            inset: 20px;
+            border: 2px dashed rgba(0, 212, 255, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: spinRing 12s linear infinite;
+            display: none;
+        }
+
+        .gs-overlay-ring.active {
+            display: block;
+        }
+
+        @keyframes spinRing {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Camera buttons */
+        .gs-cam-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .gs-btn {
+            flex: 1;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .gs-btn-start {
+            background: linear-gradient(135deg, #00d4ff, #0066cc);
+            color: #fff;
+        }
+
+        .gs-btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.35);
+        }
+
+        .gs-btn-capture {
+            background: linear-gradient(135deg, #00ff88, #00cc66);
+            color: #000;
+            display: none;
+        }
+
+        .gs-btn-capture:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.35);
+        }
+
+        .gs-btn-stop {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.4);
+            display: none;
+        }
+
+        .gs-btn-stop:hover {
+            background: rgba(255, 71, 87, 0.3);
+        }
+
+        /* Divider */
+        .gs-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.8rem;
+        }
+
+        .gs-divider::before,
+        .gs-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Upload zone */
+        .gs-upload-zone {
+            border: 2px dashed rgba(0, 212, 255, 0.35);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.88rem;
+        }
+
+        .gs-upload-zone:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.06);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .gs-upload-zone .upload-emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        #gs-file-input {
+            display: none;
+        }
+
+        /* Captured preview */
+        #gs-preview-box {
+            margin-top: 16px;
+            display: none;
+        }
+
+        #gs-preview-img {
+            width: 100%;
+            border-radius: 14px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .gs-analyze-btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 14px;
+            background: linear-gradient(135deg, #a855f7, #0066cc);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .gs-analyze-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Status */
+        #gs-status {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        #gs-status.info {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        #gs-status.success {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        #gs-status.error {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+
+        /* ── Right Column ────────────────────────────── */
+        .gs-right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Instructions Card */
+        .gs-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 22px;
+            padding: 28px 26px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gs-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 22px 22px 0 0;
+        }
+
+        .gs-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        /* Steps */
+        .gs-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .gs-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .gs-step:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .gs-step-num {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #0066cc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            color: #fff;
+        }
+
+        .gs-step-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .gs-step-content p {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.55;
+        }
+
+        /* Prevention Tips */
+        .gs-tips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .gs-tip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 16px 14px;
+            transition: all 0.3s ease;
+        }
+
+        .gs-tip:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gs-tip-icon {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .gs-tip h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 6px;
+        }
+
+        .gs-tip p {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.5;
+        }
+
+        /* Disclaimer */
+        .gs-disclaimer {
+            background: rgba(255, 193, 7, 0.07);
+            border: 1px solid rgba(255, 193, 7, 0.28);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .gs-disclaimer strong {
+            color: #ffc107;
+        }
+
+        /* ── Responsive ─────────────────────────────── */
+        @media (max-width: 900px) {
+            .gs-main {
+                grid-template-columns: 1fr;
+            }
+
+            .gs-camera-panel {
+                position: static;
+            }
+
+            .gs-hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .gs-tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">🦷</span>
+            <span>ORAL CARE-X-AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" data-lang="nav_home">Home</a></li>
+            <li><a href="about.html" data-lang="nav_about">About</a></li>
+            <li><a href="diseases.html" data-lang="nav_diseases">Diseases</a></li>
+            <li><a href="analyze.html" data-lang="nav_analyze">Analyze</a></li>
+            <li><a href="appointment.html" data-lang="nav_appointment">Book Appointment</a></li>
+            <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <select id="language-selector" class="lang-selector" onchange="Translations.set(this.value)">
+                <option value="en">🇺🇸 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="ml">🌴 മലയാളം</option>
+                <option value="mr">🟠 मराठी</option>
+                <option value="ta">🌻 தமிழ்</option>
+                <option value="kn">🟡 ಕನ್ನಡ</option>
+            </select>
+            <a href="login.html" class="nav-btn" data-lang="nav_login">Login</a>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="gs-hero">
+        <h1>🚀 Get Started with ORAL CARE-X-AI</h1>
+        <p>
+            Use your device camera or upload a photo of your teeth / dental X-ray. Our CNN-powered AI will analyse
+            it instantly and provide a comprehensive oral health report.
+        </p>
+        <div class="gs-hero-btns">
+            <a href="#camera-section" class="btn-primary">📷 Use Camera Now</a>
+            <a href="analyze.html" class="btn-secondary">📂 Full Analyse Page</a>
+        </div>
+    </section>
+
+    <!-- Main Grid -->
+    <div class="gs-main" id="camera-section">
+
+        <!-- ═══════════════════════════════════
+             LEFT: Camera + Upload Panel
+        ════════════════════════════════════ -->
+        <div class="gs-camera-panel">
+            <h2>📷 Camera / Photo Analysis</h2>
+            <p class="gs-camera-subtitle">Use your camera directly or upload a saved image for AI diagnosis.</p>
+
+            <!-- Camera viewport -->
+            <div class="gs-camera-viewport" id="gs-viewport">
+                <div class="gs-camera-idle" id="gs-idle">
+                    <span class="idle-icon">📷</span>
+                    <p>Camera preview will appear here</p>
+                </div>
+                <video id="gs-video" autoplay playsinline style="display:none;"></video>
+                <div class="gs-overlay-ring" id="overlay-ring"></div>
+            </div>
+            <canvas id="gs-canvas"></canvas>
+
+            <!-- Camera control buttons -->
+            <div class="gs-cam-btns">
+                <button class="gs-btn gs-btn-start" id="btn-start" onclick="startCamera()">📷 Start Camera</button>
+                <button class="gs-btn gs-btn-capture" id="btn-capture" onclick="capturePhoto()">📸 Capture</button>
+                <button class="gs-btn gs-btn-stop" id="btn-stop" onclick="stopCamera()">⏹ Stop</button>
+            </div>
+
+            <!-- Divider -->
+            <div class="gs-divider">or upload a saved photo</div>
+
+            <!-- Upload zone -->
+            <div class="gs-upload-zone" onclick="document.getElementById('gs-file-input').click()">
+                <span class="upload-emoji">📂</span>
+                <strong>Click to Browse</strong> — JPG, PNG, WebP (max 10 MB)
+                <input type="file" id="gs-file-input" accept="image/*" onchange="handleFileUpload(event)">
+            </div>
+
+            <!-- Preview -->
+            <div id="gs-preview-box">
+                <img id="gs-preview-img" src="" alt="Captured preview">
+                <button class="gs-analyze-btn" onclick="sendToAnalysis()">🧠 Analyse with CNN AI →</button>
+            </div>
+
+            <!-- Status message -->
+            <div id="gs-status"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+             RIGHT: Instructions + Tips
+        ════════════════════════════════════ -->
+        <div class="gs-right-col">
+
+            <!-- How to Use -->
+            <div class="gs-card">
+                <h2>📋 How to Use</h2>
+                <div class="gs-steps">
+                    <div class="gs-step">
+                        <div class="gs-step-num">1</div>
+                        <div class="gs-step-content">
+                            <h4>🔐 Login to Your Account</h4>
+                            <p>Sign in to access the full AI-powered diagnostic features. New users can register for
+                                free in under a minute.</p>
+                        </div>
+                    </div>
+                    <div class="gs-step">
+                        <div class="gs-step-num">2</div>
+                        <div class="gs-step-content">
+                            <h4>📷 Start Camera or Upload Photo</h4>
+                            <p>Click <strong>"Start Camera"</strong> to use your device camera live. Ensure the room is
+                                well-lit. Alternatively click <strong>"Browse"</strong> to upload an existing X-ray or
+                                tooth photo.</p>
+                        </div>
+                    </div>
+                    <div class="gs-step">
+                        <div class="gs-step-num">3</div>
+                        <div class="gs-step-content">
+                            <h4>😁 Position Your Teeth Clearly</h4>
+                            <p>Open your mouth fully. Aim to keep all teeth within the frame and avoid blur or low
+                                brightness. The dashed circle guides alignment.</p>
+                        </div>
+                    </div>
+                    <div class="gs-step">
+                        <div class="gs-step-num">4</div>
+                        <div class="gs-step-content">
+                            <h4>📸 Capture the Image</h4>
+                            <p>Press <strong>"Capture"</strong> when ready. Review the preview and re-capture if the
+                                image is blurry or unclear.</p>
+                        </div>
+                    </div>
+                    <div class="gs-step">
+                        <div class="gs-step-num">5</div>
+                        <div class="gs-step-content">
+                            <h4>🧠 Run CNN Analysis</h4>
+                            <p>Click <strong>"Analyse with CNN AI"</strong>. Our model processes the image through
+                                multiple convolution layers and delivers a disease report in seconds.</p>
+                        </div>
+                    </div>
+                    <div class="gs-step">
+                        <div class="gs-step-num">6</div>
+                        <div class="gs-step-content">
+                            <h4>📊 Review Your Report</h4>
+                            <p>Check the detected conditions, confidence score, severity level, and personalized
+                                recommendations. Download or share your report.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prevention Tips -->
+            <div class="gs-card">
+                <h2>🦷 Tips to Prevent Oral Diseases</h2>
+                <div class="gs-tips-grid">
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">🪥</span>
+                        <h4>Brush Twice Daily</h4>
+                        <p>Use a soft-bristled toothbrush and fluoride toothpaste. Brush for at least 2 minutes each
+                            time — morning and before bed.</p>
+                    </div>
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">🧵</span>
+                        <h4>Floss Every Day</h4>
+                        <p>Flossing removes plaque and food stuck between teeth that your brush can't reach — reducing
+                            cavity and gum disease risk by up to 40%.</p>
+                    </div>
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">💧</span>
+                        <h4>Rinse with Mouthwash</h4>
+                        <p>Use an antibacterial mouthwash after brushing to kill bacteria, neutralise acids, and keep
+                            breath fresh throughout the day.</p>
+                    </div>
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">🥦</span>
+                        <h4>Eat Tooth-Friendly Foods</h4>
+                        <p>Include dairy, leafy greens, almonds, and crunchy vegetables in your diet. These strengthen
+                            enamel and produce more saliva naturally.</p>
+                    </div>
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">🚫</span>
+                        <h4>Limit Sugar & Acid</h4>
+                        <p>Cut back on sugary drinks, sweets, and acidic foods. Sugar fuels bacteria that cause
+                            cavities. Rinse with water after consuming acidic foods.</p>
+                    </div>
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">🩺</span>
+                        <h4>Visit the Dentist Regularly</h4>
+                        <p>Schedule a professional dental check-up and cleaning every 6 months. Early detection can
+                            prevent small issues from becoming major problems.</p>
+                    </div>
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">🚭</span>
+                        <h4>Avoid Tobacco & Smoking</h4>
+                        <p>Smoking and tobacco products cause gum disease, tooth staining, bad breath, and oral cancer.
+                            Quitting dramatically improves oral health.</p>
+                    </div>
+                    <div class="gs-tip">
+                        <span class="gs-tip-icon">💦</span>
+                        <h4>Stay Hydrated</h4>
+                        <p>Drink plenty of water, especially fluoridated water. Hydration promotes saliva production
+                            which naturally cleans your mouth and prevents decay.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="gs-disclaimer">
+                ⚠️ <strong>Medical Disclaimer:</strong> ORAL CARE-X-AI is an AI-based screening tool for informational
+                purposes only. It does <strong>not</strong> replace professional dental advice, diagnosis, or treatment.
+                Always consult a qualified dentist for any dental concerns.
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🦷</span>
+                    <span>ORAL CARE-X-AI</span>
+                </a>
+                <p>Advanced AI-powered dental diagnostics for everyone.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="diseases.html">Diseases</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="analyze.html">AI Diagnosis</a></li>
+                    <li><a href="getstarted.html">Get Started</a></li>
+                    <li><a href="appointment.html">Book Appointment</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ORAL CARE-X-AI. All rights reserved. | Powered by CNN-based Medical AI</p>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Language selector init
+        document.addEventListener('DOMContentLoaded', function () {
+            const selector = document.getElementById('language-selector');
+            const currentLang = localStorage.getItem('oralcare_language') || 'en';
+            if (selector) selector.value = currentLang;
+        });
+
+        // ─── Camera Logic ───────────────────────────────────
+        let cameraStream = null;
+        let capturedImageDataURL = null;
+
+        function showStatus(msg, type = 'info') {
+            const el = document.getElementById('gs-status');
+            el.textContent = msg;
+            el.className = type;
+            el.style.display = 'block';
+        }
+        function hideStatus() {
+            document.getElementById('gs-status').style.display = 'none';
+        }
+
+        async function startCamera() {
+            hideStatus();
+            try {
+                showStatus('🔄 Requesting camera permission...', 'info');
+                cameraStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } }
+                });
+
+                const video = document.getElementById('gs-video');
+                video.srcObject = cameraStream;
+                video.style.display = 'block';
+
+                document.getElementById('gs-idle').style.display = 'none';
+                document.getElementById('overlay-ring').classList.add('active');
+
+                document.getElementById('btn-start').style.display = 'none';
+                document.getElementById('btn-capture').style.display = 'flex';
+                document.getElementById('btn-stop').style.display = 'flex';
+
+                showStatus('✅ Camera is live! Position your teeth and press Capture.', 'success');
+
+            } catch (err) {
+                showStatus('❌ Camera access denied. Please allow camera permission or use the upload option below.', 'error');
+            }
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById('gs-video');
+            const canvas = document.getElementById('gs-canvas');
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            capturedImageDataURL = canvas.toDataURL('image/jpeg', 0.92);
+
+            document.getElementById('gs-preview-img').src = capturedImageDataURL;
+            document.getElementById('gs-preview-box').style.display = 'block';
+
+            showStatus('📸 Photo captured! Review it below and click "Analyse with CNN AI".', 'success');
+            stopCamera();
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
+            const video = document.getElementById('gs-video');
+            video.style.display = 'none';
+            video.srcObject = null;
+
+            document.getElementById('gs-idle').style.display = 'flex';
+            document.getElementById('overlay-ring').classList.remove('active');
+            document.getElementById('btn-start').style.display = 'flex';
+            document.getElementById('btn-capture').style.display = 'none';
+            document.getElementById('btn-stop').style.display = 'none';
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (file.size > 10 * 1024 * 1024) {
+                showStatus('❌ File too large. Please choose an image under 10 MB.', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                capturedImageDataURL = e.target.result;
+                document.getElementById('gs-preview-img').src = capturedImageDataURL;
+                document.getElementById('gs-preview-box').style.display = 'block';
+                showStatus('✅ Image loaded! Click "Analyse with CNN AI" to proceed.', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function sendToAnalysis() {
+            if (!capturedImageDataURL) {
+                showStatus('⚠️ Please capture or upload an image first.', 'error');
+                return;
+            }
+            // Store the image in sessionStorage and redirect to the analyse page
+            try {
+                sessionStorage.setItem('pendingAnalysisImage', capturedImageDataURL);
+                showStatus('🧠 Sending to CNN Analysis engine...', 'info');
+                setTimeout(() => { window.location.href = 'analyze.html'; }, 900);
+            } catch (e) {
+                // Fallback if sessionStorage is full (large image)
+                showStatus('🧠 Redirecting to Analysis page...', 'info');
+                setTimeout(() => { window.location.href = 'analyze.html'; }, 900);
+            }
+        }
+
+        // Smooth scroll for anchor
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+    </script>
+</body>
+
+</html>

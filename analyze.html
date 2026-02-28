@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Analyze dental X-rays using AI - Detect tooth diseases, get health recommendations, and book appointments with ORAL CARE AI.">
+    <title>X-ray Analysis - ORAL CARE-X-AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', var(--font-main);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #0066cc 50%, #00a8e8 75%, #1e3c72 100%) !important;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">🦷</span>
+            <span>ORAL CARE-X-AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" data-lang="nav_home">Home</a></li>
+            <li><a href="about.html" data-lang="nav_about">About</a></li>
+            <li><a href="diseases.html" data-lang="nav_diseases">Diseases</a></li>
+            <li><a href="analyze.html" class="active" data-lang="nav_analyze">Analyze</a></li>
+            <li><a href="appointment.html" data-lang="nav_appointment">Book Appointment</a></li>
+            <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <select id="language-selector" class="lang-selector" onchange="Translations.set(this.value)">
+                <option value="en">🇺🇸 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+            </select>
+            <a href="login.html" class="nav-btn" data-lang="nav_login">Login</a>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 data-lang="analyze_title">Dental X-ray Analysis</h1>
+        <p data-lang="analyze_subtitle">Upload your dental X-rays for AI-powered disease detection and recommendations
+        </p>
+    </section>
+
+    <!-- CNN Algorithm Instructions Section -->
+    <section class="cnn-instructions-section">
+        <div class="cnn-instructions-container">
+            <div class="cnn-header">
+                <h2>🧠 How Our CNN Algorithm Works</h2>
+                <p>Our Convolutional Neural Network (CNN) has been trained on thousands of dental images to accurately
+                    detect oral diseases. Follow the simple steps below to get your AI-powered analysis.</p>
+            </div>
+
+            <!-- How To Use Cards -->
+            <div class="cnn-steps-grid">
+                <!-- Upload Photo -->
+                <div class="cnn-step-card">
+                    <div class="cnn-step-icon">📸</div>
+                    <div class="cnn-step-number">Method 1</div>
+                    <h3>Upload a Photo</h3>
+                    <ul class="cnn-step-list">
+                        <li>📂 Click <strong>"Select X-ray File"</strong> below</li>
+                        <li>🖼️ Choose a <strong>JPG, PNG, or WebP</strong> image from your device</li>
+                        <li>📏 File size must be <strong>under 10 MB</strong></li>
+                        <li>💡 For best results, use a <strong>clear, well-lit dental photo</strong> or an official
+                            X-ray image</li>
+                        <li>🔍 Our CNN will scan for cavities, gum disease, oral cancer, and more</li>
+                    </ul>
+                </div>
+
+                <!-- Use Camera -->
+                <div class="cnn-step-card">
+                    <div class="cnn-step-icon">📷</div>
+                    <div class="cnn-step-number">Method 2</div>
+                    <h3>Use Your Camera</h3>
+                    <ul class="cnn-step-list">
+                        <li>🎥 Click <strong>"Use Camera"</strong> to open your device camera</li>
+                        <li>💡 Ensure good <strong>lighting</strong> for an accurate capture</li>
+                        <li>😁 Open your mouth wide and <strong>position your teeth</strong> within the frame</li>
+                        <li>📸 Press <strong>"Capture"</strong> to take the photo</li>
+                        <li>🤖 The CNN model will instantly begin analysis on the captured image</li>
+                    </ul>
+                </div>
+
+                <!-- CNN Pipeline Info -->
+                <div class="cnn-step-card cnn-algorithm-card">
+                    <div class="cnn-step-icon">🧬</div>
+                    <div class="cnn-step-number">CNN Pipeline</div>
+                    <h3>What Happens Inside</h3>
+                    <ul class="cnn-step-list">
+                        <li>⚙️ <strong>Pre-processing:</strong> Image normalized &amp; resized to 224×224 px</li>
+                        <li>🔲 <strong>Feature Extraction:</strong> Conv layers detect edges, textures &amp; patterns
+                        </li>
+                        <li>📊 <strong>Pooling Layers:</strong> Reduce dimensions while retaining key features</li>
+                        <li>🔗 <strong>Fully Connected:</strong> Maps features to disease categories</li>
+                        <li>✅ <strong>Softmax Output:</strong> Produces confidence scores for each condition</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Disease Detection Info -->
+            <div class="cnn-disease-banner">
+                <div class="cnn-disease-icon">🦷</div>
+                <div class="cnn-disease-text">
+                    <h3>Detectable Conditions</h3>
+                    <div class="cnn-tags">
+                        <span class="cnn-tag">Dental Cavities</span>
+                        <span class="cnn-tag">Gum Disease (Gingivitis)</span>
+                        <span class="cnn-tag">Periodontitis</span>
+                        <span class="cnn-tag">Oral Thrush</span>
+                        <span class="cnn-tag">Bruxism (Teeth Grinding)</span>
+                        <span class="cnn-tag">Oral Cancer</span>
+                        <span class="cnn-tag">Tooth Abscess</span>
+                        <span class="cnn-tag">Tooth Sensitivity</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cnn-disclaimer">
+                ⚠️ <strong>Disclaimer:</strong> This AI tool is for informational purposes only and does not replace
+                professional dental advice. Please consult a qualified dentist for a confirmed diagnosis and treatment
+                plan.
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Analysis Section -->
+    <section class="analyze-section">
+        <div class="analyze-container">
+            <!-- Upload Area -->
+            <div class="upload-panel">
+                <h2 data-lang="analyze_upload">Upload X-ray Image</h2>
+
+                <div class="upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)"
+                    ondragleave="handleDragLeave(event)">
+                    <div class="upload-content">
+                        <div class="upload-icon">📸</div>
+                        <h3 data-lang="analyze_drag_drop">Drag & Drop Your X-ray</h3>
+                        <p data-lang="analyze_or_click">or click to browse</p>
+                        <input type="file" id="xray-input" accept="image/*" onchange="handleFileSelect(event)" hidden>
+                    </div>
+                </div>
+
+                <button class="upload-btn" onclick="document.getElementById('xray-input').click()"
+                    data-lang="analyze_select_file">Select X-ray File</button>
+
+                <!-- Camera Controls -->
+                <button class="upload-btn" id="cameraBtn" onclick="toggleCamera()" data-lang="analyze_use_camera">Use
+                    Camera</button>
+
+                <div id="camera-container" style="display:none;margin-top:12px">
+                    <video id="camera-video" autoplay playsinline
+                        style="width:100%;border-radius:8px;background:#000"></video>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <button class="upload-btn" onclick="captureCamera()" id="captureBtn">Capture</button>
+                        <button class="upload-btn" onclick="stopCamera()" id="stopCameraBtn">Stop Camera</button>
+                    </div>
+                </div>
+
+                <!-- Supported formats info -->
+                <div class="format-info">
+                    <p data-lang="analyze_supported">✓ Supported: JPG, PNG, GIF, WebP</p>
+                    <p data-lang="analyze_file_size">✓ Max file size: 10MB</p>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel" id="results-panel" style="display: none;">
+                <div class="results-header">
+                    <h2 data-lang="analyze_results">Analysis Results</h2>
+                    <button class="close-btn" onclick="resetAnalysis()" data-lang="btn_new_analysis">New
+                        Analysis</button>
+                </div>
+
+                <!-- Preview Image -->
+                <div class="image-preview">
+                    <img id="preview-image" src="" alt="X-ray Preview">
+                </div>
+
+                <!-- AI Analysis Results -->
+                <div class="analysis-results">
+                    <div class="result-section">
+                        <h3 data-lang="analyze_detected_diseases">Detected Issues</h3>
+                        <div id="disease-results" class="disease-results">
+                            <!-- Diseases will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Confidence Meter -->
+                    <div class="result-section">
+                        <h3 data-lang="analyze_confidence">Analysis Confidence</h3>
+                        <div class="confidence-meter">
+                            <div class="confidence-bar" id="confidence-bar" style="width: 0%"></div>
+                        </div>
+                        <span id="confidence-text" class="confidence-text">0%</span>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="result-section">
+                        <h3 data-lang="analyze_recommendations">Health Recommendations</h3>
+                        <div id="recommendations" class="recommendations-list">
+                            <!-- Recommendations will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Precautions -->
+                    <div class="result-section">
+                        <h3 data-lang="analyze_precautions">Preventive Precautions</h3>
+                        <div id="precautions" class="precautions-list">
+                            <!-- Precautions will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Severity Level -->
+                    <div class="result-section severity-section">
+                        <h3 data-lang="analyze_severity">Severity Level</h3>
+                        <div id="severity-badge" class="severity-badge severity-mild">
+                            <!-- Severity will be shown here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="bookAppointment()" data-lang="btn_book_appointment">
+                        🗓️ Book Doctor Appointment
+                    </button>
+                    <button class="btn-secondary" onclick="downloadReport()" data-lang="btn_download_report">
+                        📥 Download Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disease Information Modal -->
+    <div class="modal" id="disease-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeDiseaseModal()">&times;</span>
+            <div id="modal-disease-info">
+                <!-- Disease details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🦷</span>
+                    <span>ORAL CARE-X-AI</span>
+                </a>
+                <p>Advanced AI-powered dental diagnostics for everyone.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="diseases.html">Diseases</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">AI Diagnosis</a></li>
+                    <li><a href="#">Dental Chatbot</a></li>
+                    <li><a href="#">Health Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ORAL CARE-X-AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="translations.js"></script>
+    <script src="analyze.js"></script>
+</body>
+
+</html>

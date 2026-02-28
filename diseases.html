@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Learn about common dental diseases - symptoms, causes, and treatments. ORAL CARE AI provides comprehensive information.">
+    <title>Dental Diseases - ORAL CARE AI </title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', var(--font-main);
+            background: #061428; /* fallback */
+            min-height: 100vh;
+            position: relative;
+            overflow: auto;
+        }
+
+        /* Fullscreen background video */
+        #bgVideo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        /* Overlay to keep text readable */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 15, 40, 0.55);
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <video id="bgVideo" autoplay muted loop playsinline>
+        <source src="template.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">🦷</span>
+            <span>ORAL CARE-X-AI</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" data-lang="nav_home">Home</a></li>
+            <li><a href="about.html" data-lang="nav_about">About</a></li>
+            <li><a href="diseases.html" class="active" data-lang="nav_diseases">Diseases</a></li>
+            <li><a href="analyze.html" data-lang="nav_analyze">Analyze</a></li>
+            <li><a href="appointment.html" data-lang="nav_appointment">Book Appointment</a></li>
+            <li><a href="contact.html" data-lang="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <select id="language-selector" class="lang-selector" onchange="Translations.set(this.value)">
+                <option value="en">🇺🇸 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+            </select>
+            <a href="login.html" class="nav-btn" data-lang="nav_login">Login</a>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Dental Diseases Guide</h1>
+        <p>Understanding common dental conditions, their symptoms, and treatments</p>
+    </section>
+
+    <!-- Diseases Section -->
+    <section class="diseases-section">
+        <div class="diseases-grid">
+            <!-- Cavities -->
+            <div class="disease-card">
+                <div class="disease-image">
+                    <!-- Replace src with your image path, e.g., src="images/cavities.jpg" -->
+                    <img src="dental cavity.jpeg" alt="Dental Cavities"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='🦷';">
+                </div>
+                <div class="disease-content">
+                    <h3>Dental Cavities (Caries)</h3>
+                    <p>Cavities are permanently damaged areas in the hard surface of your teeth that develop into tiny
+                        holes.</p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Toothache or spontaneous pain</li>
+                            <li>Sensitivity to hot, cold, or sweet</li>
+                            <li>Visible holes in teeth</li>
+                            <li>Brown or black staining on tooth surface</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Very Common</span>
+                </div>
+            </div>
+
+            <!-- Gingivitis -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #ff6b6b, #ee5a5a);">
+                    <!-- Replace src with your image path, e.g., src="images/gingivitis.jpg" -->
+                    <img src="Gingivity.jpeg" alt="Gingivitis"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='🩸';">
+                </div>
+                <div class="disease-content">
+                    <h3>Gingivitis (Gum Disease)</h3>
+                    <p>A common and mild form of gum disease that causes irritation, redness, and swelling of your
+                        gingiva.</p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Swollen or puffy gums</li>
+                            <li>Bleeding when brushing/flossing</li>
+                            <li>Bad breath (halitosis)</li>
+                            <li>Red or dark red gums</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Common</span>
+                </div>
+            </div>
+
+            <!-- Periodontitis -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #a55eea, #8854d0);">
+                    <!-- Replace src with your image path, e.g., src="images/periodontitis.jpg" -->
+                    <img src="periodentiteses.jpeg" alt="Periodontitis"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='🔬';">
+                </div>
+                <div class="disease-content">
+                    <h3>Periodontitis</h3>
+                    <p>A serious gum infection that damages the soft tissue and destroys the bone supporting your teeth.
+                    </p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Receding gums</li>
+                            <li>Loose teeth or new spaces</li>
+                            <li>Painful chewing</li>
+                            <li>Pus between teeth and gums</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Serious</span>
+                </div>
+            </div>
+
+             <!-- Tooth Abscess -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #ff7675, #d63031);">
+                    <!-- Replace src with your image path, e.g., src="images/tooth-abscess.jpg" -->
+                    <img src="tooth abases.jpeg" alt="Tooth Abscess"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='⚠️';">
+                </div>
+                <div class="disease-content">
+                    <h3>Tooth Abscess</h3>
+                    <p>A pocket of pus caused by bacterial infection, occurring at the root of a tooth or in the gums.
+                    </p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Severe, throbbing toothache</li>
+                            <li>Sensitivity to pressure</li>
+                            <li>Fever and facial swelling</li>
+                            <li>Foul taste from pus drainage</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Urgent</span>
+                </div>
+            </div>
+
+            <!-- Tooth Sensitivity -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #4ecdc4, #26d0ce);">
+                    <!-- Replace src with your image path, e.g., src="images/sensitivity.jpg" -->
+                    <img src="tooth sensitivity.jpeg" alt="Tooth Sensitivity"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='❄️';">
+                </div>
+                <div class="disease-content">
+                    <h3>Tooth Sensitivity</h3>
+                    <p>Discomfort or pain in teeth when encountering certain substances and temperatures.</p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Sharp pain with cold/hot foods</li>
+                            <li>Discomfort with sweet items</li>
+                            <li>Pain when breathing cold air</li>
+                            <li>Sensitivity to acidic foods</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Very Common</span>
+                </div>
+            </div>
+
+            <!-- Oral Thrush -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
+                    <!-- Replace src with your image path, e.g., src="images/oral-thrush.jpg" -->
+                    <img src="oral thrush.jpeg" alt="Oral Thrush"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='🍄';">
+                </div>
+                <div class="disease-content">
+                    <h3>Oral Thrush (Candidiasis)</h3>
+                    <p>A fungal infection caused by Candida yeast that develops on the mucous membranes of the mouth.
+                    </p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>White lesions on tongue/cheeks</li>
+                            <li>Redness or soreness</li>
+                            <li>Cottony feeling in mouth</li>
+                            <li>Loss of taste</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Moderate</span>
+                </div>
+            </div>
+
+            <!-- Oral Infection -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #ff7675, #d63031);">
+                    <!-- Replace src with your image path, e.g., src="images/tooth-abscess.jpg" -->
+                    <img src="Oral Infections.jpeg" alt="Tooth Abscess"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='⚠️';">
+                </div>
+                <div class="disease-content">
+                    <h3>Oral Infection</h3>
+                    <p>Oral infection usually causes pain, swelling. More serious infections can lead to fever,swollen neck glands to other areas.
+                    </p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Swelling of gums, lips, cheeks</li>
+                            <li>Redness or inflammation in the mouth</li>
+                            <li>Bleeding gums, especially when brushing</li>
+                            <li>White patches on the tongue, inner cheeks, or gums</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Urgent</span>
+                </div>
+            </div>
+
+            <!-- Bruxism -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">
+                    <!-- Replace src with your image path, e.g., src="images/bruxism.jpg" -->
+                    <img src="bruxism.jpeg" alt="Bruxism"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='😬';">
+                </div>
+                <div class="disease-content">
+                    <h3>Bruxism (Teeth Grinding)</h3>
+                    <p>A condition where you grind, gnash, or clench your teeth unconsciously while awake or asleep.</p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Flattened or chipped teeth</li>
+                            <li>Jaw pain or tightness</li>
+                            <li>Headaches starting at temples</li>
+                            <li>Disrupted sleep</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Common</span>
+                </div>
+            </div>
+
+            <!-- Oral Cancer -->
+            <div class="disease-card">
+                <div class="disease-image" style="background: linear-gradient(135deg, #636e72, #2d3436);">
+                    <!-- Replace src with your image path, e.g., src="images/oral-cancer.jpg" -->
+                    <img src="oral cancer.jpeg" alt="Oral Cancer"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='🎗️';">
+                </div>
+                <div class="disease-content">
+                    <h3>Oral Cancer</h3>
+                    <p>Cancer that develops in tissues of the mouth or throat, including lips, tongue, cheeks, or gums.
+                    </p>
+                    <div class="disease-symptoms">
+                        <h4>Common Symptoms:</h4>
+                        <ul>
+                            <li>Sore that doesn't heal</li>
+                            <li>Lump or thickening in cheek</li>
+                            <li>White or red patches</li>
+                            <li>Difficulty swallowing/chewing</li>
+                        </ul>
+                    </div>
+                    <span class="disease-tag">Serious</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prevention Section -->
+        <div style="max-width: 1000px; margin: 80px auto 0;">
+            <div class="section-header">
+                <h2>Prevention Tips</h2>
+                <p>Maintain optimal oral health with these essential practices</p>
+            </div>
+            <div class="features-grid" style="margin-top: 40px;">
+                <div class="feature-card">
+                    <div class="feature-icon">🪥</div>
+                    <h3>Brush Twice Daily</h3>
+                    <p>Use fluoride toothpaste and brush for at least 2 minutes, morning and night.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧵</div>
+                    <h3>Floss Daily</h3>
+                    <p>Flossing removes plaque and food particles between teeth where brushes can't reach.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥗</div>
+                    <h3>Healthy Diet</h3>
+                    <p>Limit sugary foods and drinks. Eat calcium-rich foods for strong teeth.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🦷</div>
+                    <h3>Regular Checkups</h3>
+                    <p>Visit your dentist every 6 months for professional cleaning and examination.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚭</div>
+                    <h3>Avoid Tobacco</h3>
+                    <p>Smoking and tobacco use significantly increase risk of gum disease and oral cancer.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💧</div>
+                    <h3>Stay Hydrated</h3>
+                    <p>Water helps wash away food particles and keeps your mouth moist and healthy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div style="max-width: 800px; margin: 80px auto 0; text-align: center;">
+            <div class="hero-card" style="max-width: 100%;">
+                <h2 style="color: var(--white); margin-bottom: 15px;">Concerned About Your Dental Health?</h2>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 25px;">Upload a dental image and let our AI
+                    analyze it for potential issues. Get instant results and personalized recommendations.</p>
+                <a href="index.html#login-section" class="btn-primary">🔍 Start AI Diagnosis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">🦷</span>
+                    <span>ORAL CARE-X-AI</span>
+                </a>
+                <p>Advanced AI-powered dental diagnostics for everyone.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="diseases.html">Diseases</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">AI Diagnosis</a></li>
+                    <li><a href="#">Dental Chatbot</a></li>
+                    <li><a href="#">Health Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ORAL CARE-X-AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <button class="chatbot-btn" onclick="toggleChatbot()">💬</button>
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">🦷</div>
+            <div class="chatbot-info">
+                <h4>Dental AI Assistant</h4>
+                <span>● Online</span>
+            </div>
+            <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="chat-message bot">Hello! 👋 I'm your Dental AI Assistant. I can help identify symptoms and
+                suggest possible conditions. What symptoms are you experiencing?</div>
+        </div>
+        <div class="quick-responses">
+            <button class="quick-btn" onclick="quickResponse('toothache')">Toothache</button>
+            <button class="quick-btn" onclick="quickResponse('bleeding gums')">Bleeding Gums</button>
+            <button class="quick-btn" onclick="quickResponse('sensitivity')">Sensitivity</button>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Describe your symptoms..."
+                onkeypress="handleChatKeypress(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selector = document.getElementById('language-selector');
+            const currentLang = localStorage.getItem('oralcare_language') || 'en';
+            if (selector) {
+                selector.value = currentLang;
+                Translations.set(currentLang);
+            }
+        });
+    </script>
+</body>
+
+</html>

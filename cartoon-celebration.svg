@@ -1,0 +1,76 @@
+<svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-width: 120px;">
+  <!-- Celebration Confetti Character -->
+  <defs>
+    <style>
+      .celebration-body { fill: #4ade80; }
+      .celebration-eyes { fill: #000; }
+      .celebration-smile { stroke: #000; stroke-width: 1.5; fill: none; }
+      .celebration-shine { fill: white; opacity: 0.5; }
+    </style>
+  </defs>
+  
+  <!-- Main celebration badge -->
+  <circle class="celebration-body" cx="70" cy="80" r="45" />
+  
+  <!-- Shine effect -->
+  <ellipse class="celebration-shine" cx="55" cy="60" rx="18" ry="22" />
+  
+  <!-- Checkmark inside -->
+  <g style="animation: checkAnimation 1.5s ease-in-out infinite;">
+    <path d="M 55 80 L 65 92 L 85 60" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  
+  <!-- Confetti pieces -->
+  <g style="animation: confetti1 1.5s ease-out infinite;">
+    <rect x="15" y="30" width="8" height="8" fill="#FF6B6B" transform="rotate(45 19 34)" />
+  </g>
+  
+  <g style="animation: confetti2 1.5s ease-out infinite;">
+    <rect x="120" y="35" width="8" height="8" fill="#FFD700" transform="rotate(-45 124 39)" />
+  </g>
+  
+  <g style="animation: confetti3 1.5s ease-out infinite;">
+    <rect x="25" y="10" width="8" height="8" fill="#00d4ff" transform="rotate(30 29 14)" />
+  </g>
+  
+  <g style="animation: confetti4 1.5s ease-out infinite;">
+    <rect x="110" y="15" width="8" height="8" fill="#FF9ECD" transform="rotate(-30 114 19)" />
+  </g>
+  
+  <!-- Star decorations around the badge -->
+  <text x="25" y="60" font-size="16" style="animation: starRotate 2s linear infinite;">⭐</text>
+  <text x="115" y="75" font-size="16" style="animation: starRotate 2s linear infinite 0.5s;">⭐</text>
+  
+  <style>
+    @keyframes checkAnimation {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+    
+    @keyframes confetti1 {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-30px) rotate(360deg); opacity: 0; }
+    }
+    
+    @keyframes confetti2 {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-35px) rotate(-360deg); opacity: 0; }
+    }
+    
+    @keyframes confetti3 {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-40px) rotate(360deg); opacity: 0; }
+    }
+    
+    @keyframes confetti4 {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-38px) rotate(-360deg); opacity: 0; }
+    }
+    
+    @keyframes starRotate {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(360deg); }
+    }
+  </style>
+</svg>

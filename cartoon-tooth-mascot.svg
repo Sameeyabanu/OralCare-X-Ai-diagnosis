@@ -1,0 +1,51 @@
+<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-width: 200px;">
+  <!-- Tooth Character Mascot -->
+  <defs>
+    <style>
+      .tooth-happy { fill: #E8F4F8; stroke: #00d4ff; stroke-width: 2; }
+      .tooth-shine { fill: white; opacity: 0.6; }
+      .eyes { fill: #061428; }
+      .eyes-shine { fill: white; }
+      .mouth { stroke: #FF6B6B; stroke-width: 2; fill: none; }
+      .cheek { fill: #FFB3BA; opacity: 0.5; }
+    </style>
+  </defs>
+  
+  <!-- Body - Tooth Shape -->
+  <path class="tooth-happy" d="M 100 40 Q 140 40 150 80 L 150 160 Q 150 190 100 200 Q 50 190 50 160 L 50 80 Q 60 40 100 40 Z" />
+  
+  <!-- Shine on tooth -->
+  <ellipse class="tooth-shine" cx="85" cy="70" rx="18" ry="25" />
+  
+  <!-- Left eye -->
+  <circle class="eyes" cx="75" cy="100" r="8" />
+  <circle class="eyes-shine" cx="77" cy="98" r="3" />
+  
+  <!-- Right eye -->
+  <circle class="eyes" cx="125" cy="100" r="8" />
+  <circle class="eyes-shine" cx="127" cy="98" r="3" />
+  
+  <!-- Cheeks -->
+  <ellipse class="cheek" cx="55" cy="120" rx="12" ry="15" />
+  <ellipse class="cheek" cx="145" cy="120" rx="12" ry="15" />
+  
+  <!-- Happy smile -->
+  <path class="mouth" d="M 80 130 Q 100 145 120 130" stroke-linecap="round" />
+  
+  <!-- Left arm -->
+  <g transform="translate(40, 110)">
+    <rect width="15" height="35" rx="7" fill="#E8F4F8" stroke="#00d4ff" stroke-width="2" transform="rotate(-30)" />
+    <circle cx="-5" cy="35" r="9" fill="#E8F4F8" stroke="#00d4ff" stroke-width="2" />
+  </g>
+  
+  <!-- Right arm -->
+  <g transform="translate(160, 110)">
+    <rect width="15" height="35" rx="7" fill="#E8F4F8" stroke="#00d4ff" stroke-width="2" transform="rotate(30)" />
+    <circle cx="5" cy="35" r="9" fill="#E8F4F8" stroke="#00d4ff" stroke-width="2" />
+  </g>
+  
+  <!-- Thumbs up animation -->
+  <g transform="translate(160, 95)" style="animation: bounce 2s ease-in-out infinite;">
+    <path d="M 0 0 L 0 25 Q 5 35 15 30" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" />
+  </g>
+</svg>

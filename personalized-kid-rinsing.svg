@@ -1,0 +1,90 @@
+<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @keyframes cupTilt {
+                0%, 30%, 70%, 100% { transform: rotate(0deg) translateX(0px); transform-origin: 75px 150px; }
+                50% { transform: rotate(-25deg) translateX(5px); transform-origin: 75px 150px; }
+            }
+            @keyframes waterSplash {
+                0%, 50%, 100% { transform: translateY(0px) scaleY(1); opacity: 1; }
+                75% { transform: translateY(-20px) scaleY(0.8); opacity: 0; }
+            }
+            .cup-hand { animation: cupTilt 2s infinite ease-in-out; }
+            .water-splash { animation: waterSplash 2s infinite ease-out; }
+        </style>
+    </defs>
+    
+    <!-- Hijab (dark navy) -->
+    <ellipse cx="100" cy="40" rx="50" ry="45" fill="#1a1a3e"/>
+    <path d="M 50 45 Q 40 80 45 120 L 155 120 Q 160 80 150 45 Q 125 20 100 20 Q 75 20 50 45" fill="#1a1a3e"/>
+    
+    <!-- Face (peach skin tone) -->
+    <circle cx="100" cy="70" r="45" fill="#f4b89d"/>
+    
+    <!-- Cheeks blush (happy) -->
+    <circle cx="75" cy="88" r="9" fill="#ff9999" opacity="0.7"/>
+    <circle cx="125" cy="88" r="9" fill="#ff9999" opacity="0.7"/>
+    
+    <!-- Eyes (eyes looking up - rinsing) -->
+    <circle cx="85" cy="62" r="6" fill="#8b4513"/>
+    <circle cx="115" cy="62" r="6" fill="#8b4513"/>
+    <!-- Eye shine -->
+    <circle cx="87" cy="60" r="2" fill="#ffffff"/>
+    <circle cx="117" cy="60" r="2" fill="#ffffff"/>
+    
+    <!-- Eyebrows (raised) -->
+    <path d="M 78 50 Q 85 45 92 50" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M 108 50 Q 115 45 122 50" stroke="#333" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Nose -->
+    <path d="M 100 65 L 100 80" stroke="#d4a580" stroke-width="1.5" fill="none"/>
+    
+    <!-- Open mouth (rinsing) -->
+    <ellipse cx="100" cy="93" rx="8" ry="10" fill="#ff999d" stroke="#ff6b9d" stroke-width="1"/>
+    
+    <!-- Neck -->
+    <rect x="88" y="110" width="24" height="15" fill="#f4b89d"/>
+    
+    <!-- Body - Business casual shirt (white) -->
+    <rect x="60" y="125" width="80" height="70" fill="#ffffff" rx="8"/>
+    
+    <!-- Dark blazer/jacket -->
+    <path d="M 60 125 L 50 130 L 50 190 Q 50 200 60 200 L 140 200 Q 150 200 150 190 L 150 130 L 140 125 Z" fill="#2a2a4e" opacity="0.9"/>
+    
+    <!-- Button details -->
+    <circle cx="100" cy="145" r="2" fill="#c0c0c0"/>
+    <circle cx="100" cy="165" r="2" fill="#c0c0c0"/>
+    
+    <!-- Right arm (holding cup - animated) -->
+    <g class="cup-hand">
+        <rect x="110" y="130" width="20" height="50" fill="#f4b89d" rx="10"/>
+        <circle cx="120" cy="185" r="10" fill="#f4b89d"/>
+        
+        <!-- Cup -->
+        <rect x="108" y="135" width="25" height="30" fill="none" stroke="#00d4ff" stroke-width="2" rx="3"/>
+        <!-- Mouthwash inside -->
+        <rect x="110" y="150" width="21" height="12" fill="#4adecc" opacity="0.7" rx="2"/>
+        <!-- Tooth symbol on cup -->
+        <path d="M 118 142 L 118 152" stroke="#ffffff" stroke-width="1"/>
+        <circle cx="118" cy="147" r="2" fill="#ffffff"/>
+    </g>
+    
+    <!-- Left arm -->
+    <rect x="70" y="130" width="20" height="50" fill="#f4b89d" rx="10"/>
+    <circle cx="80" cy="185" r="10" fill="#f4b89d"/>
+    
+    <!-- Water splash particles -->
+    <g class="water-splash">
+        <circle cx="95" cy="70" r="3" fill="#4adecc" opacity="0.8"/>
+        <circle cx="105" cy="65" r="2" fill="#4adecc" opacity="0.7"/>
+        <circle cx="100" cy="60" r="2.5" fill="#4adecc" opacity="0.6"/>
+    </g>
+    
+    <!-- Legs -->
+    <rect x="80" y="200" width="16" height="40" fill="#1a1a3e"/>
+    <rect x="104" y="200" width="16" height="40" fill="#1a1a3e"/>
+    
+    <!-- Shoes -->
+    <ellipse cx="88" cy="245" rx="12" ry="8" fill="#333333"/>
+    <ellipse cx="112" cy="245" rx="12" ry="8" fill="#333333"/>
+</svg>

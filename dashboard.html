@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CNN Algorithm Database - ORAL CARE AI Dental Disease Detection System">
+    <title>CNN Algorithm Database - ORAL CARE-X-AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #0f2847 50%, #0a1628 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            background: rgba(15, 57, 120, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-left .logo-icon {
+            font-size: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .header-left h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff 0%, #0066cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: rgba(255, 71, 87, 0.2);
+            border: 1px solid rgba(255, 71, 87, 0.5);
+            border-radius: 8px;
+            color: #ff4757;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 71, 87, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Dashboard */
+        .dashboard-main {
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .dashboard-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .dashboard-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dashboard-title p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        /* Stats Cards */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(15, 57, 120, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 102, 204, 0.3);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* CNN Database Section */
+        .cnn-section {
+            background: rgba(15, 57, 120, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h3 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h3 span {
+            font-size: 1.8rem;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(0, 102, 204, 0.3);
+            border-color: #0066cc;
+        }
+
+        /* Disease Database Table */
+        .database-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
+
+        .database-table th {
+            background: rgba(0, 102, 204, 0.3);
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .database-table th:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+
+        .database-table th:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .database-table td {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 18px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .database-table tr td:first-child {
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px 0 0 10px;
+        }
+
+        .database-table tr td:last-child {
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .database-table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .database-table tbody tr:hover td {
+            background: rgba(0, 102, 204, 0.15);
+            border-color: rgba(0, 102, 204, 0.3);
+        }
+
+        .disease-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .disease-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(0, 102, 204, 0.2);
+        }
+
+        .accuracy-bar {
+            width: 120px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .accuracy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0066cc, #00d4ff);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .severity-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .severity-high {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff6b81;
+            border: 1px solid rgba(255, 71, 87, 0.4);
+        }
+
+        .severity-medium {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.4);
+        }
+
+        .severity-low {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.4);
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        /* CNN Model Info */
+        .cnn-model-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .model-card {
+            background: rgba(15, 57, 120, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .model-card .model-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .model-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .model-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Analysis Upload Section */
+        .upload-section {
+            background: rgba(15, 57, 120, 0.5);
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(0, 212, 255, 0.4);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-section:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 102, 204, 0.1);
+        }
+
+        .upload-section .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .upload-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .upload-section p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+        }
+
+        .upload-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.5);
+        }
+
+        /* Navigation Links */
+        .quick-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 102, 204, 0.3);
+            border-color: #0066cc;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cnn-model-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .dashboard-main {
+                padding: 20px;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cnn-model-info {
+                grid-template-columns: 1fr;
+            }
+
+            .database-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <span class="logo-icon">🦷</span>
+            <h1>CNN Algorithm Database</h1>
+        </div>
+        <div class="header-right">
+            <a href="index.html" style="color:#00d4ff;text-decoration:none;font-weight:600;margin-right:8px;">🏠
+                Home</a>
+            <a href="admin_dashboard.html" id="adminLink"
+                style="color:#ff6b81;text-decoration:none;font-weight:600;margin-right:8px;display:none;">🛡️ Admin
+                Panel</a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">S</div>
+                <span class="user-name" id="userName">User</span>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()">🚪 Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard-main">
+        <!-- Title -->
+        <div class="dashboard-title">
+            <h2>🧠 CNN Dental Disease Detection System</h2>
+            <p>Advanced Convolutional Neural Network powered database for accurate dental diagnostics</p>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="quick-nav">
+            <a href="index.html" class="nav-link">🏠 Home</a>
+            <a href="analyze.html" class="nav-link">🔬 Analyze X-Ray</a>
+            <a href="appointment.html" class="nav-link">📅 Book Appointment</a>
+            <a href="diseases.html" class="nav-link">📚 Disease Library</a>
+            <a href="contact.html" class="nav-link">📞 Contact</a>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon">🔬</div>
+                <div class="stat-number">8</div>
+                <div class="stat-label">Diseases Trained</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number">98.5%</div>
+                <div class="stat-label">Model Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🖼️</div>
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Images Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-number">&lt;2s</div>
+                <div class="stat-label">Analysis Time</div>
+            </div>
+        </div>
+
+        <!-- CNN Model Info -->
+        <div class="cnn-model-info">
+            <div class="model-card">
+                <div class="model-icon">🧬</div>
+                <h4>Deep Learning Architecture</h4>
+                <p>Our CNN uses VGG16 architecture with custom dense layers optimized for dental image classification.
+                </p>
+            </div>
+            <div class="model-card">
+                <div class="model-icon">📈</div>
+                <h4>Training Dataset</h4>
+                <p>Trained on 100,000+ annotated dental X-rays and images from verified medical sources worldwide.</p>
+            </div>
+            <div class="model-card">
+                <div class="model-icon">🔒</div>
+                <h4>Secure Processing</h4>
+                <p>All image analysis happens securely with HIPAA-compliant data handling and encryption.</p>
+            </div>
+        </div>
+
+        <!-- Disease Database (Removed) -->
+
+        </div>
+    </main>
+
+    <script>
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            const userName = sessionStorage.getItem('userName') || 'Guest';
+
+            // Set user info
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+
+            // Handle logout button visibility
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (isLoggedIn !== 'true') {
+                if (logoutBtn) logoutBtn.textContent = '🔑 Login';
+                if (logoutBtn) logoutBtn.onclick = () => window.location.href = 'login.html';
+            }
+
+            // Show admin panel link if user is admin
+            if (sessionStorage.getItem('userType') === 'admin') {
+                var adminLink = document.getElementById('adminLink');
+                if (adminLink) adminLink.style.display = 'inline';
+            }
+        });
+
+        // Logout function
+        function handleLogout() {
+            sessionStorage.clear();
+            window.location.href = 'login.html';
+        }
+
+        // View disease details
+        function viewDetails(disease) {
+            // Navigate to diseases page with the disease info
+            window.location.href = 'diseases.html#' + disease;
+        }
+
+        // Go to analyze page
+        function goToAnalyze() {
+            window.location.href = 'analyze.html';
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Filter logic would go here
+            });
+        });
+    </script>
+</body>
+
+</html>
